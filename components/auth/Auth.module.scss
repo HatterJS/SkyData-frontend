@@ -1,0 +1,43 @@
+.authForm {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(60, 63, 70);
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px black;
+  height: 250px;
+  margin-top: 50%;
+  transform: translateY(-50%);
+  overflow: hidden;
+}
+.authForm__tabs {
+  display: flex;
+  input[type='radio'] {
+    display: none;
+    &:not(:checked) + label {
+      background-color: rgb(40, 40, 45);
+      color: rgb(150, 150, 150);
+    }
+  }
+  label {
+    flex: 1 1 auto;
+    padding: 10px;
+    text-align: center;
+    font-weight: 500;
+    cursor: pointer;
+  }
+}
+
+.loginForm,
+.registrationForm {
+  padding: 15px;
+  height: 100%;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: 100%;
+  }
+  input[type='submit'] {
+    margin-top: auto;
+  }
+}
