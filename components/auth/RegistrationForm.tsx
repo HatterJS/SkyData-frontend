@@ -1,6 +1,11 @@
 import React from 'react';
 import styles from './Auth.module.scss';
 
+import * as Api from '@/api';
+import { AxiosError } from 'axios';
+import { createTemporaryNotification } from '../message';
+import { setCookie } from 'nookies';
+
 export const RegistrationForm: React.FC = () => {
   const [userData, setUserData] = React.useState({
     fullName: '',
@@ -15,9 +20,23 @@ export const RegistrationForm: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     console.log('register submit', userData);
     event.preventDefault();
+    try {
+      const { token } = await Api.auth.registration(userData);
+      setCookie(null, '_token', token, {
+        path: '/',
+      });
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        if (err.response) {
+          createTemporaryNotification(false, err.response.data.message);
+        } else {
+          createTemporaryNotification(false, 'Помилка реєстрації');
+        }
+      }
+    }
   };
 
   const validation = (): boolean => {

@@ -2,11 +2,15 @@ import React from 'react';
 import styles from './Auth.module.scss';
 import { LoginForm } from './LoginForm';
 import { RegistrationForm } from './RegistrationForm';
+import Loading from '../Loading';
 
 export const AuthForm: React.FC = () => {
   const [authReg, setAuthReg] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className={styles.authForm}>
       <div className={styles.authForm__tabs}>
         <input
@@ -27,7 +31,11 @@ export const AuthForm: React.FC = () => {
         />
         <label htmlFor='register'>Реєстрація</label>
       </div>
-      {authReg ? <LoginForm /> : <RegistrationForm />}
+      {authReg ? (
+        <LoginForm setIsLoading={setIsLoading} />
+      ) : (
+        <RegistrationForm />
+      )}
     </div>
   );
 };

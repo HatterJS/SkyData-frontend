@@ -25,7 +25,7 @@ body {
 
 main {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   width: 100%;
   height: 100%;
 }
@@ -56,6 +56,7 @@ button:hover {
   cursor: pointer;
 }
 input[type='submit'] {
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -67,6 +68,7 @@ input {
   color: rgb(60, 60, 60);
 }
 
+//----------- Pop-up message ----------->
 .notificationSuccess,
 .notificationError {
   position: fixed;
@@ -106,3 +108,30 @@ input {
     opacity: 0;
   }
 }
+//<----------- Pop-up message -----------
+
+//----------- Loading ----------->
+.loading {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(30, 30, 30);
+  // background: radial-gradient(
+  //   circle,
+  //   rgba(255, 255, 255, 1) 0%,
+  //   rgba(255, 255, 255, 0) 50%,
+  //   rgba(255, 255, 255, 0) 100%
+  // );
+  svg {
+    position: absolute;
+  }
+  p {
+    position: absolute;
+  }
+}
+//<----------- Loading -----------

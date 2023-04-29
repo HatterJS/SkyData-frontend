@@ -5,8 +5,9 @@ import * as Api from '@/api';
 import { setCookie } from 'nookies';
 import { AxiosError } from 'axios';
 import { createTemporaryNotification } from '../message';
+import { LoginFormProps } from './dto/loginForm.dto';
 
-export const LoginForm: React.FC = () => {
+export const LoginForm: React.FC<LoginFormProps> = ({ setIsLoading }) => {
   const [userData, setUserData] = React.useState({
     email: '',
     password: '',
@@ -26,7 +27,16 @@ export const LoginForm: React.FC = () => {
       setCookie(null, '_token', token, {
         path: '/',
       });
+      setIsLoading(true);
+      setUserData({
+        email: '',
+        password: '',
+      });
       createTemporaryNotification(true, 'Ви успішно авторизувались');
+      setTimeout(() => {
+        location.href = '/dashboard';
+        setIsLoading(false);
+      }, 2000);
     } catch (err: unknown) {
       if (err instanceof AxiosError) {
         if (err.response) {
