@@ -6,7 +6,13 @@ import { AxiosError } from 'axios';
 import { createTemporaryNotification } from '../message';
 import { setCookie } from 'nookies';
 
-export const RegistrationForm: React.FC = () => {
+interface RegistrationFormProps {
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const RegistrationForm: React.FC<RegistrationFormProps> = ({
+  setIsLoading,
+}) => {
   const [userData, setUserData] = React.useState({
     fullName: '',
     email: '',
@@ -21,13 +27,23 @@ export const RegistrationForm: React.FC = () => {
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    console.log('register submit', userData);
     event.preventDefault();
     try {
       const { token } = await Api.auth.registration(userData);
       setCookie(null, '_token', token, {
         path: '/',
       });
+      setIsLoading(true);
+      setUserData({
+        fullName: '',
+        email: '',
+        password: '',
+      });
+      createTemporaryNotification(true, 'Ви успішно зареєструвались');
+      setTimeout(() => {
+        location.href = '/dashboard';
+        setIsLoading(false);
+      }, 2000);
     } catch (err) {
       if (err instanceof AxiosError) {
         if (err.response) {
@@ -69,7 +85,7 @@ export const RegistrationForm: React.FC = () => {
           onChange={changeUserData}
           value={userData.password}
         />
-        <input type='submit' disabled={validation()} />
+        <input type='submit' disabled={validation()} value={'Реєстрація'} />
       </form>
     </div>
   );

@@ -23,13 +23,6 @@ body {
   height: 100%;
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-}
-
 p,
 a,
 h1,
@@ -48,16 +41,41 @@ input {
   padding: 0;
 }
 
-button {
-  border: none;
-  background-color: rgba(0, 0, 0, 0);
-}
-button:hover {
-  cursor: pointer;
-}
+button,
 input[type='submit'] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px black;
+  background-color: rgb(220, 220, 220);
+  color: rgb(50, 50, 50);
+  gap: 5px;
+  padding: 10px;
   font-weight: 600;
+  font-size: 1em;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  svg {
+    fill: rgb(50, 50, 50);
+  }
+}
+button:hover,
+input[type='submit']:hover {
+  background-color: white;
+}
+button:active,
+input[type='submit']:active {
+  box-shadow: 1px 1px 2px black inset;
+  background-color: rgb(150, 150, 150);
+  transform: translateY(1px);
+}
+button:disabled,
+input[type='submit']:disabled {
+  pointer-events: none;
+  box-shadow: none;
+  background-color: rgb(150, 150, 150);
+  color: rgb(120, 120, 120);
 }
 
 input {
@@ -121,12 +139,6 @@ input {
   width: 100%;
   height: 100%;
   background: rgb(30, 30, 30);
-  // background: radial-gradient(
-  //   circle,
-  //   rgba(255, 255, 255, 1) 0%,
-  //   rgba(255, 255, 255, 0) 50%,
-  //   rgba(255, 255, 255, 0) 100%
-  // );
   svg {
     position: absolute;
   }

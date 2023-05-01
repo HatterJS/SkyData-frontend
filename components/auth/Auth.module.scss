@@ -1,12 +1,12 @@
 .authForm {
   display: flex;
   flex-direction: column;
-  align-self: center;
   background-color: rgb(60, 63, 70);
   border-radius: 10px;
   box-shadow: 4px 4px 8px black;
   height: 250px;
   width: 300px;
+  margin: 0 auto;
   margin-top: 50%;
   transform: translateY(-50%);
   overflow: hidden;

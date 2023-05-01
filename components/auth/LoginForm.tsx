@@ -5,7 +5,10 @@ import * as Api from '@/api';
 import { setCookie } from 'nookies';
 import { AxiosError } from 'axios';
 import { createTemporaryNotification } from '../message';
-import { LoginFormProps } from './dto/loginForm.dto';
+
+interface LoginFormProps {
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 export const LoginForm: React.FC<LoginFormProps> = ({ setIsLoading }) => {
   const [userData, setUserData] = React.useState({
@@ -69,7 +72,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ setIsLoading }) => {
           onChange={changeUserData}
           value={userData.password}
         />
-        <input type='submit' disabled={validation()} />
+        <input type='submit' disabled={validation()} value={'Вхід'} />
       </form>
     </div>
   );

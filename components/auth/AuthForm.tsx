@@ -34,7 +34,7 @@ export const AuthForm: React.FC = () => {
       {authReg ? (
         <LoginForm setIsLoading={setIsLoading} />
       ) : (
-        <RegistrationForm />
+        <RegistrationForm setIsLoading={setIsLoading} />
       )}
     </div>
   );

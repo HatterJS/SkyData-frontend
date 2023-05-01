@@ -1,3 +1,31 @@
-.main {
-  padding-top: 50px;
+.homePage {
+  display: flex;
+  gap: 20px;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgb(80, 80, 80);
+  padding-right: 10px;
+  gap: 5px;
+  input[type='radio'] {
+    display: none;
+  }
+  input:checked + label {
+    box-shadow: 2px 2px 4px black inset;
+    background-color: rgb(90, 90, 90);
+  }
+  label {
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px black;
+    gap: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      background-color: rgb(80, 80, 80);
+    }
+  }
 }

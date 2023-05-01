@@ -1,16 +1,35 @@
+import { UploadButton } from '@/components/UploadButton';
 import styles from './Dashboard.module.scss';
-import { Header } from '@/components/Header';
-import Loading from '@/components/Loading';
+import { Layout } from '@/layouts/Layout';
+import { fileSVG, photoSVG } from '@/static/svgSprite';
 import { checkAuth } from '@/utils/checkAuth';
 import { GetServerSidePropsContext, NextPage } from 'next';
 
-const DashboardPage: NextPage = () => {
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: React.ReactNode) => React.ReactNode;
+};
+
+const DashboardPage: NextPageWithLayout = () => {
   return (
-    <main className={styles.main}>
-      <Header />
-      <h1>Dashboard</h1>
+    <main className={styles.homePage}>
+      <div className={styles.menu}>
+        <UploadButton />
+        <input type='radio' id='menuItem1' name='menuItem' defaultChecked />
+        <label htmlFor='menuItem1'>
+          {fileSVG} <p>Файли</p>{' '}
+        </label>
+        <input type='radio' id='menuItem2' name='menuItem' />
+        <label htmlFor='menuItem2'>
+          {photoSVG} <p>Фото</p>{' '}
+        </label>
+      </div>
+      <div className={styles.files}>Файли</div>
     </main>
   );
+};
+
+DashboardPage.getLayout = (page: React.ReactNode) => {
+  return <Layout title='Панель / Головна'>{page}</Layout>;
 };
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
