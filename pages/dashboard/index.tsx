@@ -4,12 +4,19 @@ import { Layout } from '@/layouts/Layout';
 import { fileSVG, photoSVG } from '@/static/svgSprite';
 import { checkAuth } from '@/utils/checkAuth';
 import { GetServerSidePropsContext, NextPage } from 'next';
+import * as Api from '@/api';
+import { FileItem } from '@/api/dto/files.dto';
+import { FileList } from '@/components/FileList';
 
-type NextPageWithLayout = NextPage & {
+interface Props {
+  items: FileItem[];
+}
+
+type NextPageWithLayout = NextPage<Props> & {
   getLayout?: (page: React.ReactNode) => React.ReactNode;
 };
 
-const DashboardPage: NextPageWithLayout = () => {
+const DashboardPage: NextPageWithLayout = ({ items }) => {
   return (
     <main className={styles.homePage}>
       <div className={styles.menu}>
@@ -23,7 +30,9 @@ const DashboardPage: NextPageWithLayout = () => {
           {photoSVG} <p>Фото</p>{' '}
         </label>
       </div>
-      <div className={styles.files}>Файли</div>
+      <div className={styles.files}>
+        <FileList items={items} />
+      </div>
     </main>
   );
 };
@@ -37,9 +46,20 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if ('redirect' in authProps) {
     return authProps;
   }
-  return {
-    props: {},
-  };
+
+  try {
+    const items = await Api.files.getAll();
+    return {
+      props: {
+        items,
+      },
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      props: { items: [] },
+    };
+  }
 };
 
 export default DashboardPage;

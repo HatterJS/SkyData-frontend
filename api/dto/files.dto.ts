@@ -1,7 +1,7 @@
 import { User } from "./auth.dto";
 
 export interface FileItem {
-    id: number;
+    _id: number;
     filename: string;
     originalName: string;
     size: number;

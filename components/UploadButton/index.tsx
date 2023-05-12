@@ -14,8 +14,7 @@ export const UploadButton: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     try {
-      const file = await Api.files.uploadFile(e.target.files?.[0]);
-      console.log(file);
+      await Api.files.uploadFile(e.target.files?.[0]);
       createTemporaryNotification(true, 'Файл завантажено');
     } catch (err) {
       createTemporaryNotification(false, 'Помилка завантаження');

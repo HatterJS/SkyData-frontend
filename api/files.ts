@@ -12,6 +12,10 @@ export const remove = (ids: number[]): Promise<void> => {
 };
 
 export const uploadFile = async (file: any) => {
+    if (file.size > 10000000) {
+        alert('Розмір файлу перевищує 10МБ');
+        throw new Error;
+    }
 
     const formData = new FormData();
     formData.append('file', file);
