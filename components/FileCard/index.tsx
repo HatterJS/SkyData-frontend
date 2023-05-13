@@ -5,6 +5,7 @@ import { isImage } from '@/utils/isImage';
 import { colorByExtention } from '@/utils/colorByExtension';
 import { noImageSVG } from '@/static/svgSprite';
 import { shortFileName } from '@/utils/formFileName';
+import { useRouter } from 'next/router';
 
 interface FileCardProps {
   filename: string;
@@ -12,6 +13,7 @@ interface FileCardProps {
 }
 
 const FileCard: React.FC<FileCardProps> = ({ originalName, filename }) => {
+  const router = useRouter();
   const ext = getFileExtention(filename);
   const imageUrl =
     ext && isImage(ext) ? 'http://localhost:7777/uploads/' + filename : '';
@@ -24,7 +26,10 @@ const FileCard: React.FC<FileCardProps> = ({ originalName, filename }) => {
   }, [originalName]);
 
   return (
-    <div className={styles.root}>
+    <div
+      className={styles.root}
+      onClick={() => router.push('http://localhost:7777/uploads/' + filename)}
+    >
       {isImage(ext) ? (
         <div className={styles.imageCover}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
