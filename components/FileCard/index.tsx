@@ -5,15 +5,15 @@ import { isImage } from '@/utils/isImage';
 import { colorByExtention } from '@/utils/colorByExtension';
 import { noImageSVG } from '@/static/svgSprite';
 import { shortFileName } from '@/utils/formFileName';
-import { useRouter } from 'next/router';
+import { FileActions } from '../FileActions';
 
 interface FileCardProps {
   filename: string;
   originalName: string;
+  _id: number;
 }
 
-const FileCard: React.FC<FileCardProps> = ({ originalName, filename }) => {
-  const router = useRouter();
+const FileCard: React.FC<FileCardProps> = ({ originalName, filename, _id }) => {
   const ext = getFileExtention(filename);
   const imageUrl =
     ext && isImage(ext) ? 'http://localhost:7777/uploads/' + filename : '';
@@ -26,10 +26,7 @@ const FileCard: React.FC<FileCardProps> = ({ originalName, filename }) => {
   }, [originalName]);
 
   return (
-    <div
-      className={styles.root}
-      onClick={() => router.push('http://localhost:7777/uploads/' + filename)}
-    >
+    <div className={styles.root}>
       {isImage(ext) ? (
         <div className={styles.imageCover}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -41,6 +38,9 @@ const FileCard: React.FC<FileCardProps> = ({ originalName, filename }) => {
           {noImageSVG}
         </div>
       )}
+      <div className={styles.fileActions}>
+        <FileActions _id={_id} filename={filename} />
+      </div>
       <span className={styles.fileName}>{formName}</span>
     </div>
   );

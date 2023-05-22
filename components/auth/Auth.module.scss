@@ -1,7 +1,7 @@
 .authForm {
   display: flex;
   flex-direction: column;
-  background-color: rgb(60, 63, 70);
+  background-color: rgb(59, 59, 59);
   border-radius: 10px;
   box-shadow: 4px 4px 8px black;
   height: 250px;
@@ -16,7 +16,7 @@
   input[type='radio'] {
     display: none;
     &:not(:checked) + label {
-      background-color: rgb(40, 40, 45);
+      background-color: rgb(44, 44, 44);
       color: rgb(150, 150, 150);
     }
   }

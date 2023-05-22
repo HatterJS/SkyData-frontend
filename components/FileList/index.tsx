@@ -11,7 +11,11 @@ export const FileList: React.FC<FileListProps> = ({ items }) => {
     <div className={styles.root}>
       {items.map((item) => (
         <div key={item._id} className='file'>
-          <FileCard filename={item.filename} originalName={item.originalName} />
+          <FileCard
+            filename={item.filename}
+            originalName={item.originalName}
+            _id={item._id}
+          />
         </div>
       ))}
     </div>
