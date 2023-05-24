@@ -1,0 +1,28 @@
+.banner {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  margin: 0 auto;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+.firstLayer,
+.secondLayer,
+.thirdLayer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+@media (max-width: 680px) {
+  .banner {
+    width: 100%;
+    height: 200px;
+  }
+}

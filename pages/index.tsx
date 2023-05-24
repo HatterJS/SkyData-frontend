@@ -1,6 +1,7 @@
 import styles from '@/styles/Home.module.scss';
 import Head from 'next/head';
 import { Header } from '@/components/Header';
+import { Banner } from '@/components/Banner';
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <Header />
-        <h1>Hello!</h1>
+        <Banner />
       </main>
     </>
   );
