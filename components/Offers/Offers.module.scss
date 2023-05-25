@@ -1,0 +1,67 @@
+.offers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  h2 {
+    text-align: center;
+  }
+}
+.firstSection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  background-color: rgb(80, 80, 80);
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-shadow: 2px 2px 6px black;
+  padding: 20px;
+  img {
+    width: 190px;
+    height: 170px;
+  }
+}
+.description {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 200px;
+  gap: 20px;
+  p {
+    text-align: justify;
+    font-weight: 500;
+  }
+}
+.buttonsBlock {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  flex: 1 1 auto;
+  gap: 10px;
+  button {
+    min-width: 200px;
+    &:first-child {
+      background-color: rgb(211, 241, 164);
+      &:hover {
+        background-color: rgb(204, 255, 122);
+      }
+    }
+  }
+}
+
+.informSection {
+  padding: 20px;
+}
+.informBody {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 20px;
+}
+.informItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 200px;
+  gap: 10px;
+}

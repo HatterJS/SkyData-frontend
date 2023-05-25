@@ -87,6 +87,7 @@ export const Banner: React.FC = () => {
         alt='second'
         width={1200}
         height={600}
+        priority={true}
         ref={secondRef as React.RefObject<HTMLImageElement>}
       />
       <Image
