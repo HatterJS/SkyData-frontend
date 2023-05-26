@@ -1,12 +1,9 @@
 .header {
-  position: sticky;
-  top: 0;
-  left: 0;
   width: 100%;
   padding: 0 20px;
-  margin-bottom: 10px;
+  margin-top: 10px;
   background-color: rgb(59, 59, 59);
-  box-shadow: 0px 2px 4px black;
+  box-shadow: 0px -2px 4px black;
   z-index: 99;
 }
 .cover {
@@ -27,6 +24,14 @@
   cursor: pointer;
   &:hover p {
     color: white;
+  }
+  svg {
+    width: 60px;
+    height: 30px;
+    fill: none;
+    path {
+      stroke: url(#gradient);
+    }
   }
   p {
     color: rgb(230, 230, 230);

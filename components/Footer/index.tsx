@@ -1,7 +1,7 @@
-import styles from './Header.module.scss';
+import { useRouter } from 'next/router';
+import styles from './Footer.module.scss';
 import * as Api from '@/api';
 import Link from 'next/link';
-import Image from 'next/image';
 
 import {
   homeSVG,
@@ -10,17 +10,19 @@ import {
   userSettingsSVG,
 } from '@/static/svgSprite';
 
-export const Header: React.FC = () => {
+export const Footer: React.FC = () => {
+  // const router = useRouter();
+
   const logoutHandle = () => {
     Api.auth.logout();
     location.href = '/';
   };
 
   return (
-    <header className={styles.header}>
+    <footer className={styles.header}>
       <div className={styles.cover}>
         <Link className={styles.logo} href='/'>
-          <Image src='/img/logotype.png' alt='logo' width={53} height={30} />
+          {logoSVG}
           <p>SkyData</p>
         </Link>
         <menu>
@@ -38,6 +40,6 @@ export const Header: React.FC = () => {
           <p>Вийти</p>
         </div>
       </div>
-    </header>
+    </footer>
   );
 };
