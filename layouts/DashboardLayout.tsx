@@ -24,7 +24,7 @@ const DashboardLayout: NextPageWithLayout = ({ items }) => {
     router.push(route);
   };
   return (
-    <main className={styles.homePage}>
+    <div className={styles.homePage}>
       <div className={styles.menu}>
         <UploadButton />
         <input
@@ -61,7 +61,7 @@ const DashboardLayout: NextPageWithLayout = ({ items }) => {
       <div className={styles.files}>
         <FileList items={items} />
       </div>
-    </main>
+    </div>
   );
 };
 

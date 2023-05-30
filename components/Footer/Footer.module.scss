@@ -1,4 +1,4 @@
-.header {
+.footer {
   width: 100%;
   padding: 0 20px;
   margin-top: 10px;
@@ -8,57 +8,30 @@
 }
 .cover {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
   max-width: 1200px;
-  height: 40px;
   margin: 0 auto;
-  menu {
-    display: flex;
-    gap: 20px;
-  }
-}
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  cursor: pointer;
-  &:hover p {
-    color: white;
-  }
-  svg {
-    width: 60px;
-    height: 30px;
-    fill: none;
-    path {
-      stroke: url(#gradient);
+  padding: 10px;
+  a {
+    color: rgb(180, 180, 180);
+    &:hover {
+      color: white;
     }
   }
-  p {
-    color: rgb(230, 230, 230);
-    font-weight: 500;
-    font-size: 1.3em;
-  }
 }
-.menuItem {
+.mainBlock {
   display: flex;
-  align-items: center;
-  padding: 5px 10px;
-  gap: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  &:hover {
-    background-color: rgb(80, 80, 80);
-  }
+  justify-content: space-between;
+}
+.about,
+.legal {
+  display: flex;
+  flex-direction: column;
 }
 
-@media (max-width: 560px) {
-  .menuItem {
-    p {
-      display: none;
-    }
-    svg {
-      width: 30px;
-      height: 30px;
-    }
-  }
+.additional {
+  font-size: 0.7em;
+  text-align: center;
 }

@@ -3,12 +3,7 @@ import * as Api from '@/api';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import {
-  homeSVG,
-  logoSVG,
-  logoutSVG,
-  userSettingsSVG,
-} from '@/static/svgSprite';
+import { homeSVG, logoutSVG, userSettingsSVG } from '@/static/svgSprite';
 
 export const Header: React.FC = () => {
   const logoutHandle = () => {
