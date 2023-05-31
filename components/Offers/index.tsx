@@ -9,8 +9,23 @@ import {
   sharePeopleSVG,
 } from '@/static/svgSprite';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { parseCookies } from 'nookies';
+import { useEffect, useState } from 'react';
 
 export const Offers: React.FC = () => {
+  const [isAuth, setIsAuth] = useState(false);
+  const router = useRouter();
+
+  const handleRegisterBtn = () => {
+    router.push('/dashboard/auth');
+  };
+
+  useEffect(() => {
+    const { _token } = parseCookies();
+    _token && setIsAuth(true);
+  }, []);
+
   return (
     <div className={styles.offers}>
       <div className={styles.firstSection}>
@@ -28,7 +43,7 @@ export const Offers: React.FC = () => {
             будь-якого гаджета.
           </p>
           <div className={styles.buttonsBlock}>
-            <button>Реєстрація</button>
+            {!isAuth && <button onClick={handleRegisterBtn}>Реєстрація</button>}
             <button onClick={() => (window.location.href = '#paidServices')}>
               Тарифи
             </button>
