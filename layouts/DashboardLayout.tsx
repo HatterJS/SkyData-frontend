@@ -1,10 +1,7 @@
-import { UploadButton } from '@/components/UploadButton';
 import styles from '../pages/dashboard/Dashboard.module.scss';
-import { Layout } from '@/layouts/Layout';
+import { UploadButton } from '@/components/UploadButton';
 import { allFilesSVG, fileSVG, photoSVG } from '@/static/svgSprite';
-import { checkAuth } from '@/utils/checkAuth';
-import { GetServerSidePropsContext, NextPage } from 'next';
-import * as Api from '@/api';
+import { NextPage } from 'next';
 import { FileItem } from '@/api/dto/files.dto';
 import { FileList } from '@/components/FileList';
 import { useRouter } from 'next/router';

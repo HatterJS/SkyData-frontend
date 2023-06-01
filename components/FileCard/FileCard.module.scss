@@ -59,3 +59,25 @@
   text-align: center;
   line-break: auto;
 }
+
+@media (max-width: 770px) {
+  .root {
+    max-width: 100px;
+  }
+  .imageCover,
+  .fileCover {
+    width: 100px;
+    height: 100px;
+    b {
+      font-size: 0.8em;
+      padding: 3px 5px;
+    }
+    svg {
+      width: 55px;
+    }
+  }
+  .fileName {
+    font-size: 0.8em;
+    max-width: 120px;
+  }
+}

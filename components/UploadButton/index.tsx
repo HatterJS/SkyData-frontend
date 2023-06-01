@@ -22,7 +22,10 @@ export const UploadButton: React.FC = () => {
   };
   return (
     <div>
-      <button onClick={handleUploadClick}>{uploadSVG}Завантажити</button>
+      <button onClick={handleUploadClick}>
+        {uploadSVG}
+        <p>Завантажити</p>
+      </button>
       <input
         type='file'
         style={{ display: 'none' }}

@@ -1,4 +1,5 @@
 .homePage {
+  position: relative;
   display: flex;
   gap: 20px;
 }
@@ -8,6 +9,11 @@
   border-right: 1px solid rgb(80, 80, 80);
   padding-right: 10px;
   gap: 5px;
+  button {
+    p {
+      color: rgb(60, 60, 60);
+    }
+  }
   input[type='radio'] {
     display: none;
   }
@@ -26,6 +32,22 @@
     transition: all 0.2s ease-in-out;
     &:hover {
       background-color: rgb(80, 80, 80);
+    }
+  }
+}
+
+@media (max-width: 770px) {
+  .menu {
+    position: sticky;
+    top: 50px;
+    height: min-content;
+    label,
+    button {
+      width: min-content;
+    }
+    label p,
+    button p {
+      display: none;
     }
   }
 }

@@ -20,6 +20,7 @@ export const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
       <Header />
       <main>
         <div className={styles.main}>
+          <h1>{title}</h1>
           <div className={styles.layout}>{children}</div>
         </div>
       </main>

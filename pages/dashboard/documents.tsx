@@ -18,7 +18,7 @@ const DashboardDocs: NextPageWithLayout = ({ items }) => {
 };
 
 DashboardDocs.getLayout = (page: React.ReactNode) => {
-  return <Layout title='Панель / Зображення'>{page}</Layout>;
+  return <Layout title='Хмарка - Документи'>{page}</Layout>;
 };
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {

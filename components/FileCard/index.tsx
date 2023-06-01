@@ -10,7 +10,7 @@ import { FileActions } from '../FileActions';
 interface FileCardProps {
   filename: string;
   originalName: string;
-  _id: number;
+  _id: string;
 }
 
 const FileCard: React.FC<FileCardProps> = ({ originalName, filename, _id }) => {

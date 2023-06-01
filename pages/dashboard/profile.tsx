@@ -24,8 +24,6 @@ const DashboardProfilePage: NextPageWithLayout<Props> = ({ userData }) => {
   return (
     <main>
       <div>
-        <h1>Мій профіль</h1>
-        <br />
         <p>
           ID: <b>{userData._id}</b>
         </p>
@@ -43,7 +41,7 @@ const DashboardProfilePage: NextPageWithLayout<Props> = ({ userData }) => {
 };
 
 DashboardProfilePage.getLayout = (page: React.ReactNode) => {
-  return <Layout title='Панель / Профіль'>{page}</Layout>;
+  return <Layout title='Профіль користувача'>{page}</Layout>;
 };
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
