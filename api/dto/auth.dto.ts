@@ -22,4 +22,16 @@ export interface User {
     email: string;
     password: string;
     fullName: string;
+    avatar: string;
+    createdAt: string;
+    isConfirmed: boolean;
+    maxSize: number;
+    tariffPlan: string;
+    updatedAt: string;
+    usedSpace: {
+        images: number;
+        documents: number;
+        total: number;
+        _id: string;
+    }
 }

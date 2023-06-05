@@ -67,19 +67,19 @@ export const Header: React.FC = () => {
               <div className={styles.dropdownMenu}>
                 <ul>
                   <li className={styles.menuItem}>
-                    <Link href={'/dashboard/profile'}>
+                    <Link href={'/profile'}>
                       {diagramSVG}
                       Інформація
                     </Link>
                   </li>
                   <li className={styles.menuItem}>
-                    <Link href={'/dashboard/userSettings'}>
+                    <Link href={'/profile/userSettings'}>
                       {userSettingsSVG}
                       Налаштування
                     </Link>
                   </li>
                   <li className={styles.menuItem}>
-                    <Link href={'/dashboard/tariff'}>
+                    <Link href={'/profile/tariff'}>
                       {tariffSVG}
                       Зміна тарифу
                     </Link>

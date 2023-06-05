@@ -4,7 +4,9 @@ import { GetServerSidePropsContext, NextPage } from 'next';
 import * as Api from '@/api';
 import { checkAuth } from '@/utils/checkAuth';
 import { Layout } from '@/layouts/Layout';
-import { logoutSVG } from '@/static/svgSprite';
+// import { logoutSVG } from '@/static/svgSprite';
+import UsedSpaceInfo from '@/components/UsedSpaceInfo';
+import TariffPlanItem from '@/components/TariffPlanItem';
 
 interface Props {
   userData: User;
@@ -16,26 +18,34 @@ interface WithLayout {
 type NextPageWithLayout<P = {}> = NextPage<P> & WithLayout;
 
 const DashboardProfilePage: NextPageWithLayout<Props> = ({ userData }) => {
-  const logoutHandle = () => {
-    Api.auth.logout();
-    location.href = '/';
-  };
+  // const logoutHandle = () => {
+  //   Api.auth.logout();
+  //   location.href = '/';
+  // };
+  // console.log(userData);
 
   return (
-    <main>
+    <main className={styles.profile}>
+      <h2>Персональні дані</h2>
       <div>
-        <p>
-          ID: <b>{userData._id}</b>
-        </p>
         <p>
           Повне ім&apos;я: <b>{userData.fullName}</b>
         </p>
         <p>
           E-mail: <b>{userData.email}</b>
         </p>
-        <br />
-        <button onClick={logoutHandle}>{logoutSVG}Вийти</button>
+        <p>
+          Обсяг хмарки: <b>{userData.maxSize} Гб</b>
+        </p>
+        {/* <br /> */}
+        {/* <button onClick={logoutHandle}>{logoutSVG}Вийти</button> */}
       </div>
+      <div className={styles.splitter}></div>
+      <h2>Використання простору</h2>
+      <UsedSpaceInfo userData={userData} />
+      <div className={styles.splitter}></div>
+      <h2>Тарифний план</h2>
+      <TariffPlanItem tariff={userData.tariffPlan} />
     </main>
   );
 };

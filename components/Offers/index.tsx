@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import { useEffect, useState } from 'react';
+import TariffPlanItem from '../TariffPlanItem';
 
 export const Offers: React.FC = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -78,66 +79,10 @@ export const Offers: React.FC = () => {
         </div>
       </div>
       <div className={styles.paidServicesSection} id='paidServices'>
-        <div className={styles.paidServiceItem}>
-          <Image
-            src='/img/startPlane.png'
-            alt='start'
-            width={130}
-            height={75}
-          />
-          <h3>Старт</h3>
-          <ul>
-            <li>Хмаринка розміром 1Гб.</li>
-            <li>Доступ з усіх пристроїв.</li>
-          </ul>
-          <h4>БЕЗКОШТОВНО</h4>
-        </div>
-        <div className={styles.paidServiceItem}>
-          <Image
-            src='/img/standartPlane.png'
-            alt='start'
-            width={130}
-            height={75}
-          />
-          <h3>Стандарт</h3>
-          <ul>
-            <li>Хмаринка розміром 15Гб.</li>
-            <li>Цілодобова підтримка.</li>
-            <li>Доступ з усіх пристроїв.</li>
-          </ul>
-          <h4>50 грн. / міс.</h4>
-        </div>
-        <div className={styles.paidServiceItem}>
-          <Image
-            src='/img/maximumPlane.png'
-            alt='start'
-            width={130}
-            height={75}
-          />
-          <h3>Максимум</h3>
-          <ul>
-            <li>Хмаринка розміром 50Гб.</li>
-            <li>Цілодобова підтримка.</li>
-            <li>Доступ з усіх пристроїв.</li>
-          </ul>
-          <h4>250 грн. / міс.</h4>
-        </div>
-        <div className={styles.paidServiceItem}>
-          <Image
-            src='/img/corporationPlane.png'
-            alt='start'
-            width={130}
-            height={75}
-          />
-          <h3>Корпорація</h3>
-          <ul>
-            <li>Хмаринка розміром 500Гб.</li>
-            <li>Можливість ділитись файлами.</li>
-            <li>Цілодобова підтримка.</li>
-            <li>Доступ з усіх пристроїв.</li>
-          </ul>
-          <h4>500 грн. / міс.</h4>
-        </div>
+        <TariffPlanItem tariff={'start'} />
+        <TariffPlanItem tariff={'standart'} />
+        <TariffPlanItem tariff={'maximum'} />
+        <TariffPlanItem tariff={'enterprise'} />
       </div>
       <div className={styles.informSection}>
         <h2>Чому слід обрати SkyData</h2>

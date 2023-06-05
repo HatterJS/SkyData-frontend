@@ -1,0 +1,49 @@
+.spaceUsed {
+  h2 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+.chartBlock {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.chart {
+  position: relative;
+  width: fit-content;
+}
+.chartPercentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.chartInformation {
+  ul {
+    li {
+      display: flex;
+      align-items: center;
+      list-style: none;
+    }
+    li div {
+      width: 10px;
+      height: 10px;
+      margin-right: 8px;
+      border-radius: 50%;
+    }
+    li:nth-child(1) div {
+      background-color: rgb(255, 235, 55);
+    }
+    li:nth-child(2) div {
+      background-color: rgb(12, 153, 209);
+    }
+    li:nth-child(3) div {
+      background-color: rgb(170, 170, 170);
+    }
+  }
+}
