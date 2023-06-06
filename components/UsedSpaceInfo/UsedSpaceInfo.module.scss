@@ -28,12 +28,12 @@
     li {
       display: flex;
       align-items: center;
+      gap: 10px;
       list-style: none;
     }
     li div {
       width: 10px;
       height: 10px;
-      margin-right: 8px;
       border-radius: 50%;
     }
     li:nth-child(1) div {

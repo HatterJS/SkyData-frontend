@@ -23,7 +23,6 @@ const UsedSpaceInfo: React.FC<UsedSpaceProps> = ({ userData }) => {
     userData.usedSpace.documents,
     totalSpace
   );
-  console.log(totalPercentage, imagePercentage, documentPercentage);
   //for chart
   const circleLength = (r: number) => {
     return 2 * Math.PI * r;
@@ -110,15 +109,15 @@ const UsedSpaceInfo: React.FC<UsedSpaceProps> = ({ userData }) => {
         <div className={styles.chartInformation}>
           <ul>
             <li>
-              <div></div> Зображення: {imagePercentage.toFixed(2)}% (
+              <div></div> <b>Зображення:</b> {imagePercentage.toFixed(2)}% (
               {(userData.usedSpace.images / 10 ** 6).toFixed(2)} Мб)
             </li>
             <li>
-              <div></div> Інше: {documentPercentage.toFixed(2)}% (
+              <div></div> <b>Інше:</b> {documentPercentage.toFixed(2)}% (
               {(userData.usedSpace.documents / 10 ** 6).toFixed(2)} Мб)
             </li>
             <li>
-              <div></div> Загалом: {totalPercentage.toFixed(2)}% (
+              <div></div> <b>Загалом:</b> {totalPercentage.toFixed(2)}% (
               {(
                 (userData.usedSpace.images + userData.usedSpace.documents) /
                 10 ** 6

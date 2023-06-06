@@ -36,7 +36,7 @@ export const Header: React.FC = () => {
     <header className={styles.header}>
       <div className={styles.cover}>
         <Link className={styles.logo} href='/'>
-          <Image src='/img/logotype.png' alt='logo' width={53} height={30} />
+          <Image src='/img/logotype.png' alt='logo' width={48} height={30} />
           <p>SkyData</p>
         </Link>
         <menu>
@@ -73,7 +73,7 @@ export const Header: React.FC = () => {
                     </Link>
                   </li>
                   <li className={styles.menuItem}>
-                    <Link href={'/profile/userSettings'}>
+                    <Link href={'/profile/settings'}>
                       {userSettingsSVG}
                       Налаштування
                     </Link>

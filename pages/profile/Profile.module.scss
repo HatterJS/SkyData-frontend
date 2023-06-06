@@ -1,0 +1,113 @@
+.profile {
+  h2 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+.profileInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.avatarNotInteractive {
+  display: block;
+  background: linear-gradient(to top, rgb(160, 160, 160), rgb(220, 220, 220));
+  box-shadow: 2px 2px 6px rgb(0, 0, 0);
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+  img {
+    pointer-events: none;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+.splitter {
+  margin: 20px;
+  border-top: 1px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(
+    90deg,
+    rgba(80, 80, 80, 0) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(80, 80, 80, 0) 100%
+  );
+}
+
+.personalInfoBlock {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  // align-items: center;
+  gap: 40px;
+}
+.avatar {
+  position: relative;
+  margin-bottom: 10px;
+  height: 100%;
+  label {
+    display: block;
+    background: linear-gradient(to top, rgb(180, 180, 180), rgb(240, 240, 240));
+    box-shadow: 2px 2px 6px rgb(0, 0, 0);
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+    cursor: pointer;
+    filter: contrast(0.8);
+    &:hover {
+      filter: none;
+    }
+  }
+  img {
+    pointer-events: none;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  input {
+    display: none;
+  }
+  button {
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    padding: 5px;
+    opacity: 0.7;
+    background-color: rgb(255, 216, 194);
+    z-index: 2;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+.nameBlock,
+.passwordBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 300px;
+}
+.deleteAccountBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  button {
+    align-self: center;
+    max-width: 300px;
+    background-color: rgb(255, 190, 160);
+    // color: white;
+  }
+}
+.deleteWarning {
+  text-align: justify;
+  svg {
+    vertical-align: bottom;
+  }
+}
