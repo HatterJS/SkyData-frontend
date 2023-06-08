@@ -27,7 +27,7 @@ const DashboardProfilePage: NextPageWithLayout<Props> = ({ userData }) => {
 
   return (
     <main className={styles.profile}>
-      {/* <h2>Персональні дані</h2> */}
+      <h2>Персональні дані:</h2>
       <div className={styles.profileInfo}>
         <div className={styles.avatarNotInteractive}>
           <Image src={userData.avatar} alt='avatar' width={100} height={100} />
@@ -47,11 +47,11 @@ const DashboardProfilePage: NextPageWithLayout<Props> = ({ userData }) => {
         </div>
       </div>
       <div className={styles.splitter}></div>
-      {/* <h2>Використання простору</h2> */}
+      <h2>Використання простору:</h2>
       <UsedSpaceInfo userData={userData} />
       <div className={styles.splitter}></div>
-      {/* <h2>Тарифний план</h2> */}
-      <TariffPlanItem tariff={userData.tariffPlan} />
+      <h2>Тарифний план:</h2>
+      <TariffPlanItem tariff={userData.tariffPlan} isActive={false} />
     </main>
   );
 };

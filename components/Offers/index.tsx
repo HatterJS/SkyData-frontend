@@ -79,10 +79,10 @@ export const Offers: React.FC = () => {
         </div>
       </div>
       <div className={styles.paidServicesSection} id='paidServices'>
-        <TariffPlanItem tariff={'start'} />
-        <TariffPlanItem tariff={'standart'} />
-        <TariffPlanItem tariff={'maximum'} />
-        <TariffPlanItem tariff={'enterprise'} />
+        <TariffPlanItem tariff={'start'} isActive={true} />
+        <TariffPlanItem tariff={'standart'} isActive={true} />
+        <TariffPlanItem tariff={'maximum'} isActive={true} />
+        <TariffPlanItem tariff={'enterprise'} isActive={true} />
       </div>
       <div className={styles.informSection}>
         <h2>Чому слід обрати SkyData</h2>

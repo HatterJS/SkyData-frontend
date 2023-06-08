@@ -66,24 +66,24 @@ export const Header: React.FC = () => {
               </div>
               <div className={styles.dropdownMenu}>
                 <ul>
-                  <li className={styles.menuItem}>
-                    <Link href={'/profile'}>
+                  <Link href={'/profile'}>
+                    <li className={styles.menuItem}>
                       {diagramSVG}
                       Інформація
-                    </Link>
-                  </li>
-                  <li className={styles.menuItem}>
-                    <Link href={'/profile/settings'}>
+                    </li>
+                  </Link>
+                  <Link href={'/profile/settings'}>
+                    <li className={styles.menuItem}>
                       {userSettingsSVG}
                       Налаштування
-                    </Link>
-                  </li>
-                  <li className={styles.menuItem}>
-                    <Link href={'/profile/tariff'}>
+                    </li>
+                  </Link>
+                  <Link href={'/profile/tariff'}>
+                    <li className={styles.menuItem}>
                       {tariffSVG}
                       Зміна тарифу
-                    </Link>
-                  </li>
+                    </li>
+                  </Link>
                   <li className={styles.menuItem} onClick={logoutHandle}>
                     {logoutSVG} Вийти
                   </li>

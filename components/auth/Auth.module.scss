@@ -1,4 +1,7 @@
 .authForm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   display: flex;
   flex-direction: column;
   background-color: rgb(59, 59, 59);
@@ -7,9 +10,10 @@
   height: 250px;
   width: 300px;
   margin: 0 auto;
-  margin-top: 50%;
-  transform: translateY(-50%);
+  // margin-top: 50%;
+  transform: translate3d(-50%, -50%, 0);
   overflow: hidden;
+  z-index: 9;
 }
 .authForm__tabs {
   display: flex;

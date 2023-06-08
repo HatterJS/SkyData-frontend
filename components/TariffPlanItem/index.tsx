@@ -1,8 +1,10 @@
+import Link from 'next/link';
 import styles from './TariffPlanItem.module.scss';
 import Image from 'next/image';
 
 interface Props {
   tariff: string;
+  isActive: boolean;
 }
 interface Tariffs {
   [key: string]: {
@@ -13,7 +15,7 @@ interface Tariffs {
   };
 }
 
-const TariffPlanItem: React.FC<Props> = ({ tariff }) => {
+const TariffPlanItem: React.FC<Props> = ({ tariff, isActive = false }) => {
   const tariffs: Tariffs = {
     start: {
       name: 'Старт',
@@ -55,16 +57,25 @@ const TariffPlanItem: React.FC<Props> = ({ tariff }) => {
   };
   const currentTariff = tariffs[tariff];
   return (
-    <div className={styles.paidServiceItem}>
-      <Image src={currentTariff.image} alt={tariff} width={130} height={75} />
-      <h3>{currentTariff.name}</h3>
-      <ul>
-        {currentTariff.conditions.map((condition) => (
-          <li key={condition}>{condition}</li>
-        ))}
-      </ul>
-      <h4>{currentTariff.price}</h4>
-    </div>
+    <Link
+      href={'/profile/order'}
+      className={
+        isActive ? styles.paidServiceItem : styles.paidServiceItemDisabled
+      }
+    >
+      <div className={styles.imageBlock}>
+        <Image src={currentTariff.image} alt={tariff} width={130} height={75} />
+        <h3>{currentTariff.name}</h3>
+      </div>
+      <div className={styles.descriptionBlock}>
+        <ul>
+          {currentTariff.conditions.map((condition) => (
+            <li key={condition}>{condition}</li>
+          ))}
+        </ul>
+        <h4>{currentTariff.price}</h4>
+      </div>
+    </Link>
   );
 };
 

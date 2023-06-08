@@ -1,6 +1,6 @@
 .profile {
   h2 {
-    text-align: center;
+    // text-align: center;
     margin-bottom: 10px;
   }
 }
@@ -41,8 +41,8 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  // align-items: center;
-  gap: 40px;
+  row-gap: 20px;
+  column-gap: 40px;
 }
 .avatar {
   position: relative;
@@ -110,4 +110,15 @@
   svg {
     vertical-align: bottom;
   }
+}
+
+.tariff {
+  h2 {
+    margin-bottom: 10px;
+  }
+}
+.chooseTariff {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
