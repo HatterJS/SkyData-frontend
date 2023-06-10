@@ -4,12 +4,26 @@ import { Layout } from '@/layouts/Layout';
 import { checkAuth } from '@/utils/checkAuth';
 import * as Api from '@/api';
 import Image from 'next/image';
-import { User } from '@/api/dto/auth.dto';
+import {
+  UpdateCommonFormDTO,
+  UpdatePassFormDTO,
+  User,
+} from '@/api/dto/auth.dto';
 import React from 'react';
 import { deleteSVG, warningSVG } from '@/static/svgSprite';
+import { deleteUser, updateCommon, updatePass } from '@/api/auth';
+import { createTemporaryNotification } from '@/components/message';
+import { useRouter } from 'next/router';
 
 interface Props {
   userData: User;
+}
+interface RegistrationData {
+  avatar: string;
+  fullName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
 }
 
 interface WithLayout {
@@ -18,16 +32,18 @@ interface WithLayout {
 type NextPageWithLayout<P = {}> = NextPage<P> & WithLayout;
 
 const ProfileSettings: NextPageWithLayout<Props> = ({ userData }) => {
+  const router = useRouter();
   //ref for avatar input
   const inputAvatar = React.useRef<HTMLInputElement>(null);
   //state for user data
-  const [registrationData, setRegistrationData] = React.useState({
-    avatar: userData.avatar,
-    fullName: userData.fullName,
-    email: userData.email,
-    password: '',
-    confirmPassword: '',
-  });
+  const [registrationData, setRegistrationData] =
+    React.useState<RegistrationData>({
+      avatar: userData.avatar,
+      fullName: userData.fullName,
+      email: userData.email,
+      password: '',
+      confirmPassword: '',
+    });
   //check user common data
   function userCommonValidation() {
     if (registrationData.fullName.length < 2) {
@@ -54,26 +70,38 @@ const ProfileSettings: NextPageWithLayout<Props> = ({ userData }) => {
   }
   //send common data and get user data from backend
   async function sendNameData() {
-    console.log(registrationData);
-    // dispatch(
-    //   fetchChangeUserData({
-    //     fullName: registrationData.fullName,
-    //   })
-    // );
+    const updateData: UpdateCommonFormDTO = {
+      fullName: registrationData.fullName,
+    };
+    try {
+      await updateCommon(updateData);
+      createTemporaryNotification(true, 'Інформацію оновлено успішно');
+    } catch (err) {
+      createTemporaryNotification(false, 'Не вдалось оновити інформацію');
+    }
   }
   //send password data and get user data from backend
   async function sendPasswordData() {
     console.log('change password');
-    // dispatch(
-    //   fetchChangeUserData({
-    //     password: registrationData.password,
-    //   })
-    // );
+    const updateData: UpdatePassFormDTO = {
+      password: registrationData.password,
+    };
+    try {
+      await updatePass(updateData);
+      setRegistrationData((prev) => ({
+        ...prev,
+        password: '',
+        confirmPassword: '',
+      }));
+      createTemporaryNotification(true, 'Пароль змінено');
+    } catch (err) {
+      createTemporaryNotification(false, 'Не вдалось змінити пароль');
+    }
   }
   //upload avatar to server
   async function uploadAvatar(file: any) {
     if (file.size > 100000) {
-      alert('Розмір файлу перевищує 100кБ');
+      createTemporaryNotification(false, 'Розмір файлу перевищує 100кБ');
       return;
     }
     console.log(file);
@@ -116,22 +144,26 @@ const ProfileSettings: NextPageWithLayout<Props> = ({ userData }) => {
   //   }
   // }
 
-  //delete user account and all articles / comments
-  function deleteAccount() {
+  //delete user account and all files
+  async function deleteAccount() {
     if (
       window.confirm(
         'УВАГА! Видалення облікового запису - незворотня процедура.\nВи дійсно бажаєте видалити обліковий запис?'
       )
     ) {
-      console.log('delete account');
-      //   axios
-      //     .delete(`/authorization/delete`)
-      //     .then((res) => {
-      //       dispatch(logOut());
-      //       localStorage.removeItem('token');
-      //       alert(res.data.message);
-      //     })
-      //     .catch((err) => console.log(err));
+      try {
+        const deleteResult = await deleteUser();
+        console.log(deleteResult);
+        createTemporaryNotification(
+          true,
+          `Користувача ${deleteResult.userName} видалено успішно\nВидалено ${deleteResult.fileCount} файлів.`
+        );
+        setTimeout(() => {
+          router.push('/');
+        }, 3000);
+      } catch (err) {
+        createTemporaryNotification(false, 'Під час видалення виникли помилки');
+      }
     }
   }
 

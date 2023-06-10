@@ -1,5 +1,5 @@
-import { GetServerSidePropsContext, NextPage } from 'next';
 import styles from './Profile.module.scss';
+import { GetServerSidePropsContext, NextPage } from 'next';
 import { Layout } from '@/layouts/Layout';
 import { checkAuth } from '@/utils/checkAuth';
 import * as Api from '@/api';

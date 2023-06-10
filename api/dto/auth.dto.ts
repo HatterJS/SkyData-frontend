@@ -17,6 +17,22 @@ export interface RegistrationResponseDTO {
     token: string;
 }
 
+export interface UpdateCommonFormDTO {
+    fullName: string;
+}
+
+export interface UpdateCommonResponseDTO {
+    fullName: string;
+}
+
+export interface UpdatePassFormDTO {
+    password: string;
+}
+
+export interface UpdatePassResponseDTO {
+    token: string;
+}
+
 export interface User {
     _id: string;
     email: string;

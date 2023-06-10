@@ -10,7 +10,8 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
+  column-gap: 20px;
+  row-gap: 10px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 10px;

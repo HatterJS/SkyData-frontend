@@ -57,7 +57,7 @@
 .fileName {
   max-width: 150px;
   text-align: center;
-  line-break: auto;
+  line-break: anywhere;
 }
 
 @media (max-width: 770px) {
