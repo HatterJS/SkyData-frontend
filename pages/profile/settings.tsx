@@ -11,7 +11,13 @@ import {
 } from '@/api/dto/auth.dto';
 import React from 'react';
 import { deleteSVG, warningSVG } from '@/static/svgSprite';
-import { deleteUser, updateCommon, updatePass } from '@/api/auth';
+import {
+  deleteAvatar,
+  deleteUser,
+  updateAvatar,
+  updateCommon,
+  updatePass,
+} from '@/api/auth';
 import { createTemporaryNotification } from '@/components/message';
 import { useRouter } from 'next/router';
 
@@ -38,7 +44,7 @@ const ProfileSettings: NextPageWithLayout<Props> = ({ userData }) => {
   //state for user data
   const [registrationData, setRegistrationData] =
     React.useState<RegistrationData>({
-      avatar: userData.avatar,
+      avatar: `http://localhost:7777/uploads/avatars/${userData.avatar}`,
       fullName: userData.fullName,
       email: userData.email,
       password: '',
@@ -82,7 +88,6 @@ const ProfileSettings: NextPageWithLayout<Props> = ({ userData }) => {
   }
   //send password data and get user data from backend
   async function sendPasswordData() {
-    console.log('change password');
     const updateData: UpdatePassFormDTO = {
       password: registrationData.password,
     };
@@ -100,50 +105,26 @@ const ProfileSettings: NextPageWithLayout<Props> = ({ userData }) => {
   }
   //upload avatar to server
   async function uploadAvatar(file: any) {
-    if (file.size > 100000) {
-      createTemporaryNotification(false, 'Розмір файлу перевищує 100кБ');
-      return;
+    try {
+      await updateAvatar(file);
+      window.location.reload();
+    } catch (err) {
+      createTemporaryNotification(false, 'Не вдалось змінити Avatar');
     }
-    console.log(file);
-    // try {
-    //   const formData = new FormData();
-    //   formData.append('image', file);
-    //   const { data } = await axios.post(`/upload?dir=users`, formData);
-    //   deleteAvatar();
-    //   setRegistrationData((prev) => ({
-    //     ...prev,
-    //     avatarUrl: backendUrl + data.url,
-    //   }));
-    //   dispatch(
-    //     fetchChangeUserData({
-    //       avatarUrl: backendUrl + data.url,
-    //     })
-    //   );
-    // } catch (err) {
-    //   alert('Не вдалось завантажити аватар');
-    // }
   }
   //clear avatar
-  function clearAvatar() {
-    console.log('clear avatar');
-    //   deleteAvatar();
-    //   inputAvatar.current.value = '';
-    //   setRegistrationData((prev) => ({ ...prev, avatarUrl: defaultAvatarUrl }));
-    //   axios.patch(`/authorization/changeData`, {
-    //     avatarUrl: defaultAvatarUrl,
-    //   });
+  async function clearAvatar() {
+    try {
+      const avatarName = await deleteAvatar();
+      setRegistrationData((prev) => ({
+        ...prev,
+        avatar: `http://localhost:7777/uploads/avatars/${avatarName}`,
+      }));
+      createTemporaryNotification(true, 'Avatar видалено успішно');
+    } catch (err) {
+      createTemporaryNotification(false, 'Не вдалось видалити Avatar');
+    }
   }
-  // //delete avatar from server
-  // function deleteAvatar() {
-  //   if (registrationData.avatarUrl !== defaultAvatarUrl) {
-  //     axios.delete(
-  //       `delete/${registrationData.avatarUrl.slice(
-  //         registrationData.avatarUrl.lastIndexOf('/') + 1
-  //       )}?dir=users`
-  //     );
-  //   }
-  // }
-
   //delete user account and all files
   async function deleteAccount() {
     if (
@@ -172,12 +153,15 @@ const ProfileSettings: NextPageWithLayout<Props> = ({ userData }) => {
       <div className={styles.personalInfoBlock}>
         <div className={styles.avatar}>
           <label htmlFor='avatar'>
-            <Image
-              src={registrationData.avatar}
-              alt='avatar'
-              width={200}
-              height={200}
-            />
+            {
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={registrationData.avatar}
+                alt='avatar'
+                width={200}
+                height={200}
+              />
+            }
           </label>
           <input
             ref={inputAvatar}

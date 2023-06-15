@@ -30,7 +30,12 @@ const DashboardProfilePage: NextPageWithLayout<Props> = ({ userData }) => {
       <h2>Персональні дані:</h2>
       <div className={styles.profileInfo}>
         <div className={styles.avatarNotInteractive}>
-          <Image src={userData.avatar} alt='avatar' width={100} height={100} />
+          <Image
+            src={`http://localhost:7777/uploads/avatars/${userData.avatar}`}
+            alt='avatar'
+            width={100}
+            height={100}
+          />
         </div>
         <div>
           <p>
