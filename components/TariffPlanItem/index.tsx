@@ -58,7 +58,7 @@ const TariffPlanItem: React.FC<Props> = ({ tariff, isActive = false }) => {
   const currentTariff = tariffs[tariff];
   return (
     <Link
-      href={'/profile/order'}
+      href={{ pathname: `/profile/order`, query: { tariff } }}
       className={
         isActive ? styles.paidServiceItem : styles.paidServiceItemDisabled
       }
