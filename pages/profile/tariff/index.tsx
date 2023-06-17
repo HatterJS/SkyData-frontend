@@ -1,4 +1,4 @@
-import styles from './Profile.module.scss';
+import styles from './Tariff.module.scss';
 import { GetServerSidePropsContext, NextPage } from 'next';
 import { Layout } from '@/layouts/Layout';
 import { checkAuth } from '@/utils/checkAuth';

@@ -1,4 +1,4 @@
-import styles from './Profile.module.scss';
+import styles from './Tariff.module.scss';
 import { GetServerSidePropsContext, NextPage } from 'next';
 import { Layout } from '@/layouts/Layout';
 import { checkAuth } from '@/utils/checkAuth';
@@ -9,9 +9,15 @@ import { warningSVG } from '@/static/svgSprite';
 import { useRouter } from 'next/router';
 import { User } from '@/api/dto/auth.dto';
 import { CSSProperties } from 'react';
+import { createTemporaryNotification } from '@/components/message';
 
 interface Props {
   userData: User;
+}
+interface orderData {
+  fullName: string;
+  email: string;
+  period: number;
 }
 
 interface WithLayout {
@@ -21,34 +27,53 @@ type NextPageWithLayout<P = {}> = NextPage<P> & WithLayout;
 
 const Order: NextPageWithLayout<Props> = ({ userData }) => {
   const router = useRouter();
+  const tariff = Array.isArray(router.query?.tariff)
+    ? router.query?.tariff[0]
+    : router.query?.tariff || 'standart';
   const defaultPeriod = 3;
 
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting, submitCount },
     handleSubmit,
     reset,
     watch,
-  } = useForm({
+  } = useForm<orderData>({
     mode: 'onBlur',
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-    reset();
+  const onSubmit = async (data: orderData): Promise<void> => {
+    const tgResponse = await Api.telegram.orderToTelegram({
+      userId: userData._id,
+      fullName: data.fullName,
+      email: data.email,
+      tariff,
+      previousTariff: userData.tariffPlan,
+      period: data.period,
+      totalPrice: data.period * 250,
+    });
+    if (tgResponse) {
+      createTemporaryNotification(true, 'Запит надіслано успішно');
+      setTimeout(() => {
+        router.push({
+          pathname: '/profile/tariff/orderSuccess',
+          query: {
+            previousTariff: userData.tariffPlan,
+            tariff,
+            period: data.period,
+            totalPrice: data.period * 250,
+          },
+        });
+      }, 2000);
+    } else {
+      createTemporaryNotification(false, 'Не вдалось зробити замовлення');
+    }
+    // reset();
   };
-
   return (
     <main className={styles.order}>
       <h2>Ви обрали:</h2>
-      <TariffPlanItem
-        tariff={
-          Array.isArray(router.query?.tariff)
-            ? router.query?.tariff[0]
-            : router.query?.tariff || 'standart'
-        }
-        isActive={false}
-      />
+      <TariffPlanItem tariff={tariff} isActive={false} />
       <div className={styles.splitter}></div>
       <div className={styles.orderForm}>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -123,10 +148,12 @@ const Order: NextPageWithLayout<Props> = ({ userData }) => {
               <div
                 className={styles.circleDiagram}
                 style={
-                  { '--percent': `${watch('period') * 8.33}` } as CSSProperties
+                  {
+                    '--percent': `${(watch('period') || defaultPeriod) * 8.33}`,
+                  } as CSSProperties
                 }
               >
-                {watch('period')} міс
+                {watch('period') || defaultPeriod} міс
               </div>
             </div>
           </label>
@@ -134,7 +161,11 @@ const Order: NextPageWithLayout<Props> = ({ userData }) => {
             <p>Загальна вартість:</p>
             <div>{250 * watch('period')} грн.</div>
           </div>
-          <input type='submit' value={'Замовити'} disabled={!isValid} />
+          <input
+            type='submit'
+            value={submitCount >= 1 ? 'Запит надіслано' : 'Замовити'}
+            disabled={!isValid || isSubmitting || submitCount >= 1}
+          />
         </form>
       </div>
     </main>
