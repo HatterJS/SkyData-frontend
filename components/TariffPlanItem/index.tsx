@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styles from './TariffPlanItem.module.scss';
 import Image from 'next/image';
+import Loading from '../Loading';
 
 interface Props {
   tariff: string;
@@ -56,6 +57,7 @@ const TariffPlanItem: React.FC<Props> = ({ tariff, isActive = false }) => {
     },
   };
   const currentTariff = tariffs[tariff];
+  if (!currentTariff) return <Loading />;
   return (
     <Link
       href={{ pathname: `/profile/tariff/order`, query: { tariff } }}

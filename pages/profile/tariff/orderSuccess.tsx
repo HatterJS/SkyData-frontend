@@ -3,6 +3,8 @@ import { NextPage } from 'next';
 import { Layout } from '@/layouts/Layout';
 import TariffPlanItem from '@/components/TariffPlanItem';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { arrowSVG } from '@/static/svgSprite';
 
 interface queryProps {
   previousTariff: string;
@@ -22,13 +24,35 @@ const OrderSuccess: NextPage = () => {
 
   return (
     <Layout title='Успішне замовлення тарифу'>
-      <div className={styles.content}>
-        <h2>Попередній тариф:</h2>
-        <TariffPlanItem tariff={queryProps.previousTariff} isActive={false} />
-        <h2>Новий тариф:</h2>
-        <TariffPlanItem tariff={queryProps.tariff} isActive={false} />
-        <p>Період: {queryProps.period} місяців</p>
-        <p>Загальна ціна складає: {queryProps.totalPrice} грн.</p>
+      <div className={styles.successOrder}>
+        <p>
+          Вітаємо, Ваше замовлення на зміну тарифного плану було успішно
+          прийняте.
+        </p>
+        <p>
+          Найближчим часом на Вашу електронну пошту буде надіслано лист із
+          детальними умовами переходу на новий тарифний план.
+        </p>
+        <div className={styles.splitter}></div>
+        <div className={styles.tariffsUpdate}>
+          <TariffPlanItem tariff={queryProps.previousTariff} isActive={false} />
+          {arrowSVG}
+          <TariffPlanItem tariff={queryProps.tariff} isActive={false} />
+        </div>
+        <div className={styles.splitter}></div>
+        <p>
+          <b>Період:</b> {queryProps.period} міс.
+        </p>
+        <p>
+          <b>Загальна вартість:</b> {queryProps.totalPrice} грн.
+        </p>
+
+        <div className={styles.splitter}></div>
+        <p>
+          У разі будь-яких проблем або питань щодо зміни тарифного плану, будь
+          ласка, зв&apos;яжіться з нашою{' '}
+          <Link href={'/contacts'}>підтримкою</Link>.
+        </p>
       </div>
     </Layout>
   );

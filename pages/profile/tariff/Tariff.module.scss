@@ -181,3 +181,28 @@
     font-weight: 600;
   }
 }
+
+.successOrder {
+  p {
+    text-indent: 1.5em;
+    text-align: justify;
+    margin: 5px 0;
+  }
+  a {
+    color: rgb(110, 190, 255);
+  }
+}
+.tariffsUpdate {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+@media (max-width: 720px) {
+  .tariffsUpdate {
+    flex-direction: column;
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+}
