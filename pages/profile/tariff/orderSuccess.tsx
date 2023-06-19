@@ -46,7 +46,6 @@ const OrderSuccess: NextPage = () => {
         <p>
           <b>Загальна вартість:</b> {queryProps.totalPrice} грн.
         </p>
-
         <div className={styles.splitter}></div>
         <p>
           У разі будь-яких проблем або питань щодо зміни тарифного плану, будь

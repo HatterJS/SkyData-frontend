@@ -44,7 +44,7 @@ const ProfileSettings: NextPageWithLayout<Props> = ({ userData }) => {
   //state for user data
   const [registrationData, setRegistrationData] =
     React.useState<RegistrationData>({
-      avatar: `http://localhost:7777/uploads/avatars/${userData.avatar}`,
+      avatar: `${process.env.NEXT_PUBLIC_SERVER_PROTOCOL}://${process.env.NEXT_PUBLIC_SERVER_NAME}:${process.env.NEXT_PUBLIC_SERVER_PORT}/uploads/avatars/${userData.avatar}`,
       fullName: userData.fullName,
       email: userData.email,
       password: '',
@@ -118,7 +118,7 @@ const ProfileSettings: NextPageWithLayout<Props> = ({ userData }) => {
       const avatarName = await deleteAvatar();
       setRegistrationData((prev) => ({
         ...prev,
-        avatar: `http://localhost:7777/uploads/avatars/${avatarName}`,
+        avatar: `${process.env.NEXT_PUBLIC_SERVER_PROTOCOL}://${process.env.NEXT_PUBLIC_SERVER_NAME}:${process.env.NEXT_PUBLIC_SERVER_PORT}/uploads/avatars/${avatarName}`,
       }));
       createTemporaryNotification(true, 'Avatar видалено успішно');
     } catch (err) {

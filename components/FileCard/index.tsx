@@ -16,7 +16,10 @@ interface FileCardProps {
 const FileCard: React.FC<FileCardProps> = ({ originalName, filename, _id }) => {
   const ext = getFileExtention(filename);
   const imageUrl =
-    ext && isImage(ext) ? 'http://localhost:7777/uploads/' + filename : '';
+    ext && isImage(ext)
+      ? `${process.env.NEXT_PUBLIC_SERVER_PROTOCOL}://${process.env.NEXT_PUBLIC_SERVER_NAME}:${process.env.NEXT_PUBLIC_SERVER_PORT}/uploads/` +
+        filename
+      : '';
   const color = colorByExtention(ext);
   const [formName, setFormName] = React.useState(originalName);
 
