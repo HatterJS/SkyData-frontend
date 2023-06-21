@@ -31,7 +31,7 @@ const DashboardProfilePage: NextPageWithLayout<Props> = ({ userData }) => {
       <div className={styles.profileInfo}>
         <div className={styles.avatarNotInteractive}>
           <Image
-            src={`${process.env.NEXT_PUBLIC_SERVER_PROTOCOL}://${process.env.NEXT_PUBLIC_SERVER_NAME}:${process.env.NEXT_PUBLIC_SERVER_PORT}/uploads/avatars/${userData.avatar}`}
+            src={`${process.env.NEXT_PUBLIC_SERVER_PROTOCOL}://${process.env.NEXT_PUBLIC_SERVER_NAME}/uploads/avatars/${userData.avatar}`}
             alt='avatar'
             width={100}
             height={100}

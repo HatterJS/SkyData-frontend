@@ -17,7 +17,7 @@ const FileCard: React.FC<FileCardProps> = ({ originalName, filename, _id }) => {
   const ext = getFileExtention(filename);
   const imageUrl =
     ext && isImage(ext)
-      ? `${process.env.NEXT_PUBLIC_SERVER_PROTOCOL}://${process.env.NEXT_PUBLIC_SERVER_NAME}:${process.env.NEXT_PUBLIC_SERVER_PORT}/uploads/` +
+      ? `${process.env.NEXT_PUBLIC_SERVER_PROTOCOL}://${process.env.NEXT_PUBLIC_SERVER_NAME}/uploads/` +
         filename
       : '';
   const color = colorByExtention(ext);

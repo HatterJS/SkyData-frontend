@@ -113,7 +113,7 @@ const UsedSpaceInfo: React.FC<UsedSpaceProps> = ({ userData }) => {
               {(userData.usedSpace.images / 10 ** 6).toFixed(2)} Мб)
             </li>
             <li>
-              <div></div> <b>Інше:</b> {documentPercentage.toFixed(2)}% (
+              <div></div> <b>Документи:</b> {documentPercentage.toFixed(2)}% (
               {(userData.usedSpace.documents / 10 ** 6).toFixed(2)} Мб)
             </li>
             <li>

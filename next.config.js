@@ -6,7 +6,7 @@ const nextConfig = {
       {
         protocol: process.env.NEXT_PUBLIC_SERVER_PROTOCOL,
         hostname: process.env.NEXT_PUBLIC_SERVER_NAME,
-        port: process.env.NEXT_PUBLIC_BACKEND_PORT,
+        port: '',
         pathname: '/uploads/avatars/**',
       },
     ],
