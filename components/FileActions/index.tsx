@@ -10,7 +10,7 @@ interface FileActionsProps {
 
 export const FileActions: React.FC<FileActionsProps> = ({ filename, _id }) => {
   const handleDownloadClick = () => {
-    const fileUrl = `http://localhost:7777/uploads/${filename}`;
+    const fileUrl = `${process.env.NEXT_PUBLIC_SERVER_PROTOCOL}://${process.env.NEXT_PUBLIC_SERVER_NAME}/uploads/${filename}`;
     window.open(fileUrl, '_blank');
   };
 
