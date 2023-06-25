@@ -1,6 +1,65 @@
 .root {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+}
+.toolBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 4px black;
+  background-color: rgb(220, 220, 220);
+  overflow: hidden;
+  div {
+    display: flex;
+    align-items: center;
+    p {
+      color: rgb(40, 40, 40);
+      font-weight: 600;
+      padding: 10px;
+    }
+  }
+  input[type='radio'] {
+    display: none;
+  }
+  input:checked + label {
+    // box-shadow: 1px 1px 2px black inset;
+    background-color: rgb(160, 160, 160);
+    svg {
+      fill: rgb(50, 50, 50);
+    }
+  }
+  label:hover {
+    svg {
+      fill: rgb(50, 50, 50);
+    }
+  }
+  label {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+  }
+  svg {
+    fill: rgb(80, 80, 80);
+  }
+}
+
+.fileList {
+  display: flex;
+  // justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 20px;
+}
+
+@media (max-width: 540px) {
+  .toolBar {
+    div {
+      p {
+        display: none;
+      }
+    }
+  }
 }

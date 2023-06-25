@@ -14,6 +14,7 @@ type NextPageWithLayout = NextPage<Props> & {
 };
 
 const DashboardPage: NextPageWithLayout = ({ items }) => {
+  console.log(items);
   return <DashboardLayout items={items} />;
 };
 

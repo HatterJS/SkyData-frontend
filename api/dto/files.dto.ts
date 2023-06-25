@@ -7,4 +7,6 @@ export interface FileItem {
     size: number;
     mimetype: string;
     user: User;
+    createdAt: string;
+    updatedAt: string;
 }
