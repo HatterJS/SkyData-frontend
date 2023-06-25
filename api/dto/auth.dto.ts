@@ -45,7 +45,7 @@ export interface User {
     tariffPlan: string;
     updatedAt: string;
     usedSpace: {
-        images: number;
+        media: number;
         documents: number;
         total: number;
         _id: string;

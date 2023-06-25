@@ -12,11 +12,11 @@ const UsedSpaceInfo: React.FC<UsedSpaceProps> = ({ userData }) => {
     return (usedSpace / totalSpace) * 100;
   };
   const totalPercentage = calculatePercentage(
-    userData.usedSpace.images + userData.usedSpace.documents,
+    userData.usedSpace.media + userData.usedSpace.documents,
     totalSpace
   );
-  const imagePercentage = calculatePercentage(
-    userData.usedSpace.images,
+  const mediaPercentage = calculatePercentage(
+    userData.usedSpace.media,
     totalSpace
   );
   const documentPercentage = calculatePercentage(
@@ -35,8 +35,8 @@ const UsedSpaceInfo: React.FC<UsedSpaceProps> = ({ userData }) => {
   const rotate3 = 180;
   const strokeWidth = 10;
   const l1 = (circleLength(r3) * totalPercentage) / 100;
-  const l2 = (circleLength(r2) * imagePercentage) / 100;
-  const l3 = (circleLength(r1) * documentPercentage) / 100;
+  const l3 = (circleLength(r1) * mediaPercentage) / 100;
+  const l2 = (circleLength(r2) * documentPercentage) / 100;
   return (
     <div className={styles.spaceUsed}>
       <div className={styles.chartBlock}>
@@ -109,17 +109,17 @@ const UsedSpaceInfo: React.FC<UsedSpaceProps> = ({ userData }) => {
         <div className={styles.chartInformation}>
           <ul>
             <li>
-              <div></div> <b>Зображення:</b> {imagePercentage.toFixed(2)}% (
-              {(userData.usedSpace.images / 10 ** 6).toFixed(2)} Мб)
-            </li>
-            <li>
               <div></div> <b>Документи:</b> {documentPercentage.toFixed(2)}% (
               {(userData.usedSpace.documents / 10 ** 6).toFixed(2)} Мб)
             </li>
             <li>
+              <div></div> <b>Медіафайли:</b> {mediaPercentage.toFixed(2)}% (
+              {(userData.usedSpace.media / 10 ** 6).toFixed(2)} Мб)
+            </li>
+            <li>
               <div></div> <b>Загалом:</b> {totalPercentage.toFixed(2)}% (
               {(
-                (userData.usedSpace.images + userData.usedSpace.documents) /
+                (userData.usedSpace.media + userData.usedSpace.documents) /
                 10 ** 6
               ).toFixed(2)}{' '}
               Мб)

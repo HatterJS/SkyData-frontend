@@ -7,7 +7,7 @@ const extColor = {
     docx: '#a9d5ee',
     txt: '#dcdcdc',
     zip: '#daa5f3',
-    // jpg: '#dddf74',
+    psd: '#449aff',
     // jpeg: '#dddf74',
     // png: '#dddf74',
     // gif: '#dddf74',

@@ -1,6 +1,12 @@
 import styles from '../pages/dashboard/Dashboard.module.scss';
 import { UploadButton } from '@/components/UploadButton';
-import { allFilesSVG, fileSVG, photoSVG } from '@/static/svgSprite';
+import {
+  allFilesSVG,
+  audioSVG,
+  fileSVG,
+  photoSVG,
+  videoSVG,
+} from '@/static/svgSprite';
 import { NextPage } from 'next';
 import { FileItem } from '@/api/dto/files.dto';
 import { FileList } from '@/components/FileList';
@@ -48,10 +54,30 @@ const DashboardLayout: NextPageWithLayout = ({ items }) => {
           type='radio'
           id='menuItem3'
           name='menuItem'
+          defaultChecked={currentPage === '/dashboard/videos'}
+          onChange={() => handleMenuItemChange('/dashboard/videos')}
+        />
+        <label htmlFor='menuItem3'>
+          {videoSVG} <p>Відео</p>{' '}
+        </label>
+        <input
+          type='radio'
+          id='menuItem4'
+          name='menuItem'
+          defaultChecked={currentPage === '/dashboard/audios'}
+          onChange={() => handleMenuItemChange('/dashboard/audios')}
+        />
+        <label htmlFor='menuItem4'>
+          {audioSVG} <p>Аудіо</p>{' '}
+        </label>
+        <input
+          type='radio'
+          id='menuItem5'
+          name='menuItem'
           defaultChecked={currentPage === '/dashboard/documents'}
           onChange={() => handleMenuItemChange('/dashboard/documents')}
         />
-        <label htmlFor='menuItem3'>
+        <label htmlFor='menuItem5'>
           {fileSVG} <p>Документи</p>{' '}
         </label>
       </div>

@@ -46,7 +46,7 @@ export const Header: React.FC = () => {
           </Link>
           <Link className={styles.menuItem} href={'/about'}>
             {infoSVG}
-            <p>Про нас</p>
+            <p>Про&nbsp;нас</p>
           </Link>
           <Link className={styles.menuItem} href={'/contacts'}>
             {contactSVG}
@@ -92,10 +92,12 @@ export const Header: React.FC = () => {
             </div>
           </menu>
         ) : (
-          <Link className={styles.menuItem} href='/dashboard/auth'>
-            {enterSVG}
-            <p>Авторизація</p>
-          </Link>
+          <menu>
+            <Link className={styles.menuItem} href='/dashboard/auth'>
+              {enterSVG}
+              <p>Авторизація</p>
+            </Link>
+          </menu>
         )}
       </div>
     </header>

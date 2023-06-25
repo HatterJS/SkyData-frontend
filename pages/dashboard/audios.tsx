@@ -13,12 +13,12 @@ type NextPageWithLayout = NextPage<Props> & {
   getLayout?: (page: React.ReactNode) => React.ReactNode;
 };
 
-const DashboardDocs: NextPageWithLayout = ({ items }) => {
+const DashboardPhotos: NextPageWithLayout = ({ items }) => {
   return <DashboardLayout items={items} />;
 };
 
-DashboardDocs.getLayout = (page: React.ReactNode) => {
-  return <Layout title='Хмарка - Документи'>{page}</Layout>;
+DashboardPhotos.getLayout = (page: React.ReactNode) => {
+  return <Layout title='Хмарка - Аудіо'>{page}</Layout>;
 };
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
@@ -28,7 +28,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 
   try {
-    const items = await Api.files.getAll('docs');
+    const items = await Api.files.getAll('audios');
     return {
       props: {
         items,
@@ -42,4 +42,4 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
-export default DashboardDocs;
+export default DashboardPhotos;
