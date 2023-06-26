@@ -25,7 +25,7 @@
     display: none;
   }
   input:checked + label {
-    // box-shadow: 1px 1px 2px black inset;
+    box-shadow: 1px 0px 2px black inset;
     background-color: rgb(160, 160, 160);
     svg {
       fill: rgb(50, 50, 50);
@@ -47,11 +47,46 @@
   }
 }
 
-.fileList {
+.fileListCard {
   display: flex;
   // justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 20px;
+}
+.fileListList {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    thead {
+      th {
+        background-color: rgb(80, 80, 80);
+        border: 1px solid gray;
+        padding: 5px;
+        &:first-child {
+          border-left: none;
+        }
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+    tbody {
+      border: none;
+      text-align: center;
+      tr {
+        border-top: 1px solid gray;
+      }
+      td {
+        white-space: nowrap;
+        padding: 5px 10px;
+        &:nth-child(2) {
+          white-space: normal;
+          word-break: break-all;
+          text-align: start;
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 540px) {
@@ -59,6 +94,26 @@
     div {
       p {
         display: none;
+      }
+    }
+  }
+  .fileListList {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 440px) {
+  .fileListList {
+    tbody {
+      td {
+        padding: 5px 5px;
+        writing-mode: vertical-rl;
+        &:nth-child(1) {
+          writing-mode: inherit;
+        }
+        &:nth-child(2) {
+          writing-mode: inherit;
+        }
       }
     }
   }

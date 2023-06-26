@@ -8,13 +8,29 @@ import {
   sortNameSVG,
   sortSizeSVG,
 } from '@/static/svgSprite';
+import { useEffect, useState } from 'react';
+import { formDate, formName, formSize } from '@/utils/formFileData';
 
 interface FileListProps {
   items: FileItem[];
 }
 
 export const FileList: React.FC<FileListProps> = ({ items }) => {
-  console.log(items[0].createdAt);
+  const [viewStyle, setViewStyle] = useState<String>('card');
+  // const [sortType, setSortType] = useState<String>('date');
+  // items.sort(
+  //   (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  // );
+
+  const handleViewStyle = (style: string) => {
+    setViewStyle(style);
+    localStorage.setItem('fileViewStyle', style);
+  };
+
+  useEffect(() => {
+    setViewStyle(localStorage.getItem('fileViewStyle') ?? 'card');
+  }, []);
+
   return (
     <div className={styles.root}>
       <div className={styles.toolBar}>
@@ -39,28 +55,66 @@ export const FileList: React.FC<FileListProps> = ({ items }) => {
             type='radio'
             name='viewStyle'
             id='viewStyleCell'
-            defaultChecked
+            checked={viewStyle === 'card'}
+            onChange={() => handleViewStyle('card')}
           />
           <label htmlFor='viewStyleCell' title='таблиця'>
             {cellsSVG}
           </label>
-          <input type='radio' name='viewStyle' id='viewStyleList' />
+          <input
+            type='radio'
+            name='viewStyle'
+            id='viewStyleList'
+            checked={viewStyle === 'list'}
+            onChange={() => handleViewStyle('list')}
+          />
           <label htmlFor='viewStyleList' title='список'>
             {listSVG}
           </label>
         </div>
       </div>
-      <div className={styles.fileList}>
-        {items.map((item) => (
-          <div key={item._id} className='file'>
-            <FileCard
-              filename={item.filename}
-              originalName={item.originalName}
-              _id={item._id}
-            />
-          </div>
-        ))}
-      </div>
+      {viewStyle === 'card' ? (
+        <div className={styles.fileListCard}>
+          {items.map((item) => (
+            <div key={item._id} className='file'>
+              <FileCard
+                filename={item.filename}
+                originalName={item.originalName}
+                _id={item._id}
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className={styles.fileListList}>
+          <table>
+            <thead>
+              <tr>
+                <th>№</th>
+                <th>Ім&apos;я</th>
+                <th>Тип</th>
+                <th>
+                  Розмір
+                  <br />
+                  МБ
+                </th>
+                <th>Дата</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((item, index) => (
+                <tr key={item._id}>
+                  <td>{index + 1}</td>
+                  <td>{formName(item.originalName)}</td>
+                  <td>{item.originalName.split('.').pop()}</td>
+                  <td>{formSize(item.size)}</td>
+                  <td>{formDate(item.createdAt)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
