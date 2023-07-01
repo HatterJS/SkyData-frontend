@@ -45,7 +45,7 @@ const DashboardProfilePage: NextPageWithLayout<Props> = ({ userData }) => {
             <b>E-mail:</b> {userData.email}
           </p>
           <p>
-            <b>Обсяг хмарки:</b> {userData.maxSize} Гб
+            <b>Обсяг хмарки:</b> {userData.maxSize} МБ
           </p>
           {/* <br /> */}
           {/* <button onClick={logoutHandle}>{logoutSVG}Вийти</button> */}

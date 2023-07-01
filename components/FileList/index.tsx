@@ -17,10 +17,39 @@ interface FileListProps {
 
 export const FileList: React.FC<FileListProps> = ({ items }) => {
   const [viewStyle, setViewStyle] = useState<String>('card');
-  // const [sortType, setSortType] = useState<String>('date');
-  // items.sort(
-  //   (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  // );
+  const [sortedItems, setSortedItems] = useState(items);
+
+  const handleSortingType = (sortType: string) => {
+    if (sortType === 'name') {
+      setSortedItems((prev) => {
+        const sortedItems = [...prev];
+        sortedItems.sort((a, b) =>
+          a.originalName.localeCompare(b.originalName)
+        );
+        return sortedItems;
+      });
+      return;
+    }
+    if (sortType === 'size') {
+      setSortedItems((prev) => {
+        const sortedItems = [...prev];
+        sortedItems.sort((a, b) => a.size - b.size);
+        return sortedItems;
+      });
+      return;
+    }
+    if (sortType === 'date') {
+      setSortedItems((prev) => {
+        const sortedItems = [...prev];
+        sortedItems.sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+        return sortedItems;
+      });
+      return;
+    }
+  };
 
   const handleViewStyle = (style: string) => {
     setViewStyle(style);
@@ -36,15 +65,30 @@ export const FileList: React.FC<FileListProps> = ({ items }) => {
       <div className={styles.toolBar}>
         <div className={styles.sortTools}>
           <p>Сортування:</p>
-          <input type='radio' name='sorting' id='sortingName' />
+          <input
+            type='radio'
+            name='sorting'
+            id='sortingName'
+            onChange={() => handleSortingType('name')}
+          />
           <label htmlFor='sortingName' title="за ім'ям">
             {sortNameSVG}
           </label>
-          <input type='radio' name='sorting' id='sortingSize' />
+          <input
+            type='radio'
+            name='sorting'
+            id='sortingSize'
+            onChange={() => handleSortingType('size')}
+          />
           <label htmlFor='sortingSize' title='за розміром'>
             {sortSizeSVG}
           </label>
-          <input type='radio' name='sorting' id='sortingDate' defaultChecked />
+          <input
+            type='radio'
+            name='sorting'
+            id='sortingDate'
+            onChange={() => handleSortingType('date')}
+          />
           <label htmlFor='sortingDate' title='за датою'>
             {sortDateSVG}
           </label>
@@ -58,7 +102,7 @@ export const FileList: React.FC<FileListProps> = ({ items }) => {
             checked={viewStyle === 'card'}
             onChange={() => handleViewStyle('card')}
           />
-          <label htmlFor='viewStyleCell' title='таблиця'>
+          <label htmlFor='viewStyleCell' title='зображення'>
             {cellsSVG}
           </label>
           <input
@@ -75,7 +119,7 @@ export const FileList: React.FC<FileListProps> = ({ items }) => {
       </div>
       {viewStyle === 'card' ? (
         <div className={styles.fileListCard}>
-          {items.map((item) => (
+          {sortedItems.map((item) => (
             <div key={item._id} className='file'>
               <FileCard
                 filename={item.filename}
@@ -102,7 +146,7 @@ export const FileList: React.FC<FileListProps> = ({ items }) => {
               </tr>
             </thead>
             <tbody>
-              {items.map((item, index) => (
+              {sortedItems.map((item, index) => (
                 <tr key={item._id}>
                   <td>{index + 1}</td>
                   <td>{formName(item.originalName)}</td>

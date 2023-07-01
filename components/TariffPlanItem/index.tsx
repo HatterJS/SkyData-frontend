@@ -21,14 +21,14 @@ const TariffPlanItem: React.FC<Props> = ({ tariff, isActive = false }) => {
     start: {
       name: 'Старт',
       image: '/img/startPlane.png',
-      conditions: ['Хмаринка розміром 1Гб.', 'Доступ з усіх пристроїв.'],
+      conditions: ['Хмаринка розміром 10МБ.', 'Доступ з усіх пристроїв.'],
       price: 'БЕЗКОШТОВНО',
     },
     standart: {
       name: 'Стандарт',
       image: '/img/standartPlane.png',
       conditions: [
-        'Хмаринка розміром 15Гб.',
+        'Хмаринка розміром 15ГБ.',
         'Цілодобова підтримка.',
         'Доступ з усіх пристроїв.',
       ],
@@ -38,7 +38,7 @@ const TariffPlanItem: React.FC<Props> = ({ tariff, isActive = false }) => {
       name: 'Максимум',
       image: '/img/maximumPlane.png',
       conditions: [
-        'Хмаринка розміром 50Гб.',
+        'Хмаринка розміром 50ГБ.',
         'Цілодобова підтримка.',
         'Доступ з усіх пристроїв.',
       ],
@@ -48,7 +48,7 @@ const TariffPlanItem: React.FC<Props> = ({ tariff, isActive = false }) => {
       name: 'Корпорація',
       image: '/img/corporationPlane.png',
       conditions: [
-        'Хмаринка розміром 500Гб.',
+        'Хмаринка розміром 500ГБ.',
         'Можливість ділитись файлами.',
         'Цілодобова підтримка.',
         'Доступ з усіх пристроїв.',

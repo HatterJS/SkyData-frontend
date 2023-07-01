@@ -7,7 +7,7 @@ interface UsedSpaceProps {
 }
 
 const UsedSpaceInfo: React.FC<UsedSpaceProps> = ({ userData }) => {
-  const totalSpace: number = userData.maxSize * 10 ** 7; // 7 змінити на 9 <----------------
+  const totalSpace: number = userData.maxSize * 10 ** 6; // 7 змінити на 9 <----------------
   const calculatePercentage = (usedSpace: number, totalSpace: number) => {
     return (usedSpace / totalSpace) * 100;
   };

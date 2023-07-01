@@ -32,6 +32,19 @@ const Order: NextPageWithLayout<Props> = ({ userData }) => {
     : router.query?.tariff || 'standart';
   const defaultPeriod = 3;
 
+  const tariffPrice: {
+    [key: string]: number;
+    start: number;
+    standart: number;
+    maximum: number;
+    enterprise: number;
+  } = {
+    start: 0,
+    standart: 50,
+    maximum: 250,
+    enterprise: 500,
+  };
+
   const {
     register,
     formState: { errors, isValid, isSubmitting, submitCount },
@@ -76,8 +89,8 @@ const Order: NextPageWithLayout<Props> = ({ userData }) => {
       <TariffPlanItem tariff={tariff} isActive={false} />
       <div className={styles.splitter}></div>
       <div className={styles.orderForm}>
+        <h2>Оформлення запиту:</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h2>Оформлення запиту:</h2>
           <label>
             Повне ім&apos;я:
             <input
@@ -128,44 +141,54 @@ const Order: NextPageWithLayout<Props> = ({ userData }) => {
               </div>
             )}
           </label>
-          <label>
-            <div className={styles.periodTools}>
-              <div className={styles.rangeBlock}>
-                <input
-                  type='range'
-                  min={0}
-                  max={12}
-                  step={1}
-                  defaultValue={defaultPeriod}
-                  {...register('period', { required: true })}
-                />
-                <div className={styles.rangeValues}>
-                  <p>0</p>
-                  <div>{watch('period') || defaultPeriod}</div>
-                  <p>12</p>
+          {tariff !== 'start' && (
+            <label>
+              <div className={styles.periodTools}>
+                <div className={styles.rangeBlock}>
+                  <input
+                    type='range'
+                    min={0}
+                    max={12}
+                    step={1}
+                    defaultValue={defaultPeriod}
+                    {...register('period', { required: true, min: 1 })}
+                  />
+                  <div className={styles.rangeValues}>
+                    <p>0</p>
+                    <div>{watch('period') || defaultPeriod}</div>
+                    <p>12</p>
+                  </div>
+                </div>
+                <div
+                  className={styles.circleDiagram}
+                  style={
+                    {
+                      '--percent': `${
+                        (watch('period') || defaultPeriod) * 8.33
+                      }`,
+                    } as CSSProperties
+                  }
+                >
+                  {watch('period') || defaultPeriod} міс
                 </div>
               </div>
-              <div
-                className={styles.circleDiagram}
-                style={
-                  {
-                    '--percent': `${(watch('period') || defaultPeriod) * 8.33}`,
-                  } as CSSProperties
-                }
-              >
-                {watch('period') || defaultPeriod} міс
-              </div>
+            </label>
+          )}
+          {tariff !== 'start' && (
+            <div className={styles.totalCost}>
+              <p>Загальна вартість:</p>
+              <div>{tariffPrice[tariff] * watch('period')} грн.</div>
             </div>
-          </label>
-          <div className={styles.totalCost}>
-            <p>Загальна вартість:</p>
-            <div>{250 * watch('period')} грн.</div>
-          </div>
-          <input
-            type='submit'
-            value={submitCount >= 1 ? 'Запит надіслано' : 'Замовити'}
-            disabled={!isValid || isSubmitting || submitCount >= 1}
-          />
+          )}
+          {tariff !== userData.tariffPlan ? (
+            <input
+              type='submit'
+              value={submitCount >= 1 ? 'Запит надіслано' : 'Замовити'}
+              disabled={!isValid || isSubmitting || submitCount >= 1}
+            />
+          ) : (
+            'Ви вже використовуєте цей тариф.'
+          )}
         </form>
       </div>
     </main>
