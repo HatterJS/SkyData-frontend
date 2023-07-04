@@ -8,7 +8,7 @@ import { ideaSVG, phoneSVG, teamSVG, techProblemSVG } from '@/static/svgSprite';
 const Contacts: NextPage = () => {
   return (
     <Layout title='Контакти'>
-      <div className={styles.content}>
+      <div className={styles.contentContacts}>
         <p>
           Виникли питання або потрібна додаткова інформація, будь ласка,
           звертайтесь:

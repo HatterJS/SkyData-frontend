@@ -113,3 +113,47 @@
     vertical-align: bottom;
   }
 }
+
+//confirm-email page -------------------------->
+.messagePositive,
+.messageNegative {
+  text-align: center;
+  margin-bottom: 20px;
+  p {
+    color: rgb(159, 216, 132);
+    font-weight: 600;
+  }
+}
+.messageNegative {
+  p {
+    color: rgb(230, 141, 141);
+  }
+}
+.loader {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+}
+.loaderTimer {
+  position: absolute;
+  font-size: 2em;
+  font-weight: 800;
+}
+.loaderSpinner {
+  width: 80px;
+  height: 80px;
+  border: 8px solid rgb(100, 100, 100);
+  border-top: 8px solid rgb(180, 180, 180);
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

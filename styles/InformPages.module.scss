@@ -1,4 +1,5 @@
-.content {
+.content,
+.contentContacts {
   max-width: 900px;
   margin: 0 auto;
   padding: 10px;
@@ -26,6 +27,13 @@
   svg {
     margin-right: 10px;
     vertical-align: sub;
+  }
+}
+.contentContacts {
+  li {
+    margin-top: 3px;
+    padding: 0;
+    list-style-position: inside;
   }
 }
 

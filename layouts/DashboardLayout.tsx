@@ -11,6 +11,8 @@ import { NextPage } from 'next';
 import { FileItem } from '@/api/dto/files.dto';
 import { FileList } from '@/components/FileList';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
+import Loading from '@/components/Loading';
 
 interface Props {
   items: FileItem[];
@@ -22,14 +24,18 @@ type NextPageWithLayout = NextPage<Props> & {
 
 const DashboardLayout: NextPageWithLayout = ({ items }) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const currentPage = router.pathname;
   const handleMenuItemChange = (route: string) => {
     router.push(route);
   };
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className={styles.homePage}>
       <div className={styles.menu}>
-        <UploadButton />
+        <UploadButton setIsLoading={setIsLoading} />
         <input
           type='radio'
           id='menuItem1'
@@ -87,30 +93,5 @@ const DashboardLayout: NextPageWithLayout = ({ items }) => {
     </div>
   );
 };
-
-// DashboardLayout.getLayout = (page: React.ReactNode) => {
-//   return <Layout title='Панель / Головна'>{page}</Layout>;
-// };
-
-// export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-//   const authProps = await checkAuth(ctx);
-//   if ('redirect' in authProps) {
-//     return authProps;
-//   }
-
-//   try {
-//     const items = await Api.files.getAll('all');
-//     return {
-//       props: {
-//         items,
-//       },
-//     };
-//   } catch (err) {
-//     console.log(err);
-//     return {
-//       props: { items: [] },
-//     };
-//   }
-// };
 
 export default DashboardLayout;

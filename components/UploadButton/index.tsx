@@ -1,12 +1,15 @@
 import { uploadSVG } from '@/static/svgSprite';
-import { useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { createTemporaryNotification } from '../message';
 import * as Api from '@/api';
-import Loading from '../Loading';
+import { AxiosError } from 'axios';
 
-export const UploadButton: React.FC = () => {
+interface UploadButtonProps {
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+}
+
+export const UploadButton: React.FC<UploadButtonProps> = ({ setIsLoading }) => {
   const fileInput = useRef<HTMLInputElement | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleUploadClick = () => {
     fileInput.current?.click();
@@ -15,22 +18,39 @@ export const UploadButton: React.FC = () => {
   const handleFileInputChange = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setIsLoading(true);
-    console.log(isLoading);
+    //check file size limit
+    if (e.target.files && e.target.files[0].size > 10 * 10 ** 6) {
+      createTemporaryNotification(false, 'Файл не може перевищувати 10МБ');
+      return;
+    }
     try {
+      const userData = await Api.auth.getMe();
+      //check total size limit
+      if (
+        e.target.files &&
+        e.target.files[0].size + userData.usedSpace.total >
+          userData.maxSize * 10 ** 6
+      ) {
+        createTemporaryNotification(
+          false,
+          'Ви перевищили загальний обсяг хмарки'
+        );
+        return;
+      }
+
+      setIsLoading(true);
       await Api.files.uploadFile(e.target.files?.[0]);
       window.location.reload();
       setIsLoading(false);
-      console.log(isLoading);
-    } catch (err) {
-      createTemporaryNotification(false, 'Помилка завантаження');
+    } catch (err: AxiosError | any) {
+      createTemporaryNotification(
+        false,
+        err?.response?.data?.message || 'Помилка завантаження'
+      );
       setIsLoading(false);
-      console.log(isLoading);
     }
   };
-  return isLoading ? (
-    <Loading />
-  ) : (
+  return (
     <div>
       <button onClick={handleUploadClick}>
         {uploadSVG}

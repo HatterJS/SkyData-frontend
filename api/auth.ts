@@ -15,7 +15,7 @@ import { createTemporaryNotification } from '@/components/message';
 
 export const getMe = async (): Promise<User> => {
     const { data } = await axios.get('/users/me');
-    destroyCookie(null, '_token', { path: '/' });
+    // destroyCookie(null, '_token', { path: '/' });
     return data;
 };
 
