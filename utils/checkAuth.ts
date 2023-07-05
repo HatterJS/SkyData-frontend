@@ -20,3 +20,30 @@ export const checkAuth = async (ctx: GetServerSidePropsContext) => {
         };
     }
 };
+
+export const checkConfirmEmail = async (ctx: GetServerSidePropsContext) => {
+    const { _token } = nookies.get(ctx);
+    axios.defaults.headers.Authorization = 'Bearer ' + _token;
+    try {
+        const userData = await Api.auth.getMe();
+        if (userData.isConfirmed) {
+            return {
+                props: {},
+            };
+        } else {
+            return {
+                redirect: {
+                    destination: '/profile',
+                    permanent: false,
+                },
+            };
+        }
+    } catch (err) {
+        return {
+            redirect: {
+                destination: '/dashboard/auth',
+                permanent: false,
+            },
+        };
+    }
+};

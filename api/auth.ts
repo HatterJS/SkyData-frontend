@@ -33,6 +33,11 @@ export const login = async (
     return data;
 };
 
+export const confirmEmail = async (): Promise<boolean> => {
+    const { data } = await axios.patch('/users/confirmation');
+    return data;
+}
+
 export const updateCommon = async (values: UpdateCommonFormDTO): Promise<UpdateCommonResponseDTO> => {
     const { data } = await axios.patch('/users/updatecommon', values);
     return data;

@@ -19,9 +19,9 @@ const ConfirmEmail: NextPage = () => {
     setCookie(null, '_token', token, {
       path: '/',
     });
-    //check is valid token
     try {
-      await Api.auth.getMe();
+      //check is valid token
+      await Api.auth.confirmEmail();
       return true;
     } catch (err) {
       destroyCookie(null, '_token', { path: '/' });
