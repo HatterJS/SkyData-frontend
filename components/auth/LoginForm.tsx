@@ -5,6 +5,13 @@ import * as Api from '@/api';
 import { setCookie } from 'nookies';
 import { AxiosError } from 'axios';
 import { createTemporaryNotification } from '../message';
+import {
+  emailSVG,
+  facebookSVG,
+  googleSVG,
+  passwordSVG,
+  twitterSVG,
+} from '@/static/svgSprite';
 
 interface LoginFormProps {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -58,21 +65,38 @@ export const LoginForm: React.FC<LoginFormProps> = ({ setIsLoading }) => {
   return (
     <div className={styles.loginForm}>
       <form onSubmit={handleSubmit}>
-        <input
-          type='email'
-          name='email'
-          placeholder='Email'
-          onChange={changeUserData}
-          value={userData.email}
-        />
-        <input
-          type='password'
-          name='password'
-          placeholder='Пароль'
-          onChange={changeUserData}
-          value={userData.password}
-        />
-        <input type='submit' disabled={validation()} value={'Вхід'} />
+        <label>
+          {emailSVG}
+          <input
+            type='email'
+            name='email'
+            placeholder='Email'
+            onChange={changeUserData}
+            value={userData.email}
+          />
+        </label>
+        <label>
+          {passwordSVG}
+          <input
+            type='password'
+            name='password'
+            placeholder='Пароль'
+            onChange={changeUserData}
+            value={userData.password}
+          />
+        </label>
+        <label>
+          <div></div>
+          <input type='submit' disabled={validation()} value={'Вхід'} />
+        </label>
+        <div className={styles.socialAuth}>
+          <p>Авторизація через соіцальні мережі:</p>
+          <div>
+            {googleSVG}
+            {facebookSVG}
+            {twitterSVG}
+          </div>
+        </div>
       </form>
     </div>
   );
