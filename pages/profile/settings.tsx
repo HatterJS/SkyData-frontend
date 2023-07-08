@@ -134,7 +134,6 @@ const ProfileSettings: NextPageWithLayout<Props> = ({ userData }) => {
     ) {
       try {
         const deleteResult = await deleteUser();
-        console.log(deleteResult);
         createTemporaryNotification(
           true,
           `Користувача ${deleteResult.userName} видалено успішно\nВидалено ${deleteResult.fileCount} файлів.`
@@ -150,6 +149,18 @@ const ProfileSettings: NextPageWithLayout<Props> = ({ userData }) => {
 
   return (
     <main>
+      {!userData.isConfirmed && (
+        <div className={styles.warningConfirmation}>
+          {warningSVG}
+          <div className={styles.message}>
+            <p>
+              УВАГА! На Ваш E-mail надіслано лист для активації облікового
+              запису. Наразі Вам не доступне хмарне сховище.
+            </p>
+            <div className={styles.shadow}></div>
+          </div>
+        </div>
+      )}
       <div className={styles.personalInfoBlock}>
         <div className={styles.avatar}>
           <label htmlFor='avatar'>

@@ -8,6 +8,7 @@ import { Layout } from '@/layouts/Layout';
 import UsedSpaceInfo from '@/components/UsedSpaceInfo';
 import TariffPlanItem from '@/components/TariffPlanItem';
 import Image from 'next/image';
+import { warningSVG } from '@/static/svgSprite';
 
 interface Props {
   userData: User;
@@ -19,14 +20,20 @@ interface WithLayout {
 type NextPageWithLayout<P = {}> = NextPage<P> & WithLayout;
 
 const DashboardProfilePage: NextPageWithLayout<Props> = ({ userData }) => {
-  // const logoutHandle = () => {
-  //   Api.auth.logout();
-  //   location.href = '/';
-  // };
-  // console.log(userData);
-
   return (
     <main className={styles.profile}>
+      {!userData.isConfirmed && (
+        <div className={styles.warningConfirmation}>
+          {warningSVG}
+          <div className={styles.message}>
+            <p>
+              УВАГА! На Ваш E-mail надіслано лист для активації облікового
+              запису. Наразі Вам не доступне хмарне сховище.
+            </p>
+            <div className={styles.shadow}></div>
+          </div>
+        </div>
+      )}
       <h2>Персональні дані:</h2>
       <div className={styles.profileInfo}>
         <div className={styles.avatarNotInteractive}>

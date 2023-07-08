@@ -49,7 +49,6 @@ const Order: NextPageWithLayout<Props> = ({ userData }) => {
     register,
     formState: { errors, isValid, isSubmitting, submitCount },
     handleSubmit,
-    reset,
     watch,
   } = useForm<orderData>({
     mode: 'onBlur',
