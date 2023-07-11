@@ -38,6 +38,11 @@ export const confirmEmail = async (): Promise<boolean> => {
     return data;
 }
 
+export const resendConfirmation = async (): Promise<string> => {
+    const { data } = await axios.get('/auth/resendMail');
+    return data;
+}
+
 export const updateCommon = async (values: UpdateCommonFormDTO): Promise<UpdateCommonResponseDTO> => {
     const { data } = await axios.patch('/users/updatecommon', values);
     return data;

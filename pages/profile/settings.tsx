@@ -20,6 +20,7 @@ import {
 } from '@/api/auth';
 import { createTemporaryNotification } from '@/components/message';
 import { useRouter } from 'next/router';
+import { NotConfirmed } from '@/components/NotConfirmed';
 
 interface Props {
   userData: User;
@@ -149,18 +150,7 @@ const ProfileSettings: NextPageWithLayout<Props> = ({ userData }) => {
 
   return (
     <main>
-      {!userData.isConfirmed && (
-        <div className={styles.warningConfirmation}>
-          {warningSVG}
-          <div className={styles.message}>
-            <p>
-              УВАГА! На Ваш E-mail надіслано лист для активації облікового
-              запису. Наразі Вам не доступне хмарне сховище.
-            </p>
-            <div className={styles.shadow}></div>
-          </div>
-        </div>
-      )}
+      {!userData.isConfirmed && <NotConfirmed />}
       <div className={styles.personalInfoBlock}>
         <div className={styles.avatar}>
           <label htmlFor='avatar'>

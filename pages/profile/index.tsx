@@ -1,14 +1,14 @@
 import styles from './Profile.module.scss';
+
 import { User } from '@/api/dto/auth.dto';
 import { GetServerSidePropsContext, NextPage } from 'next';
 import * as Api from '@/api';
 import { checkAuth } from '@/utils/checkAuth';
 import { Layout } from '@/layouts/Layout';
-// import { logoutSVG } from '@/static/svgSprite';
 import UsedSpaceInfo from '@/components/UsedSpaceInfo';
 import TariffPlanItem from '@/components/TariffPlanItem';
 import Image from 'next/image';
-import { warningSVG } from '@/static/svgSprite';
+import { NotConfirmed } from '@/components/NotConfirmed';
 
 interface Props {
   userData: User;
@@ -22,18 +22,7 @@ type NextPageWithLayout<P = {}> = NextPage<P> & WithLayout;
 const DashboardProfilePage: NextPageWithLayout<Props> = ({ userData }) => {
   return (
     <main className={styles.profile}>
-      {!userData.isConfirmed && (
-        <div className={styles.warningConfirmation}>
-          {warningSVG}
-          <div className={styles.message}>
-            <p>
-              УВАГА! На Ваш E-mail надіслано лист для активації облікового
-              запису. Наразі Вам не доступне хмарне сховище.
-            </p>
-            <div className={styles.shadow}></div>
-          </div>
-        </div>
-      )}
+      {!userData.isConfirmed && <NotConfirmed />}
       <h2>Персональні дані:</h2>
       <div className={styles.profileInfo}>
         <div className={styles.avatarNotInteractive}>
